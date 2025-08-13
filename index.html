@@ -3,101 +3,598 @@
 <head>
     <title>SafeHarbor Browser</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; font-size: 18px; }
-        .header { background: #f0f0f0; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
-        .nav-btn { padding: 10px 20px; margin: 5px; font-size: 16px; border: none; background: #007acc; color: white; border-radius: 4px; cursor: pointer; }
-        .nav-btn:hover { background: #005a99; }
-        .address-bar { width: 60%; padding: 10px; font-size: 16px; margin: 10px; }
-        .go-btn { padding: 10px 20px; font-size: 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        .main { display: flex; height: 500px; }
-        .web-content { flex: 1; border: 2px solid #ccc; }
-        .ai-sidebar { width: 300px; background: #f8f9fa; padding: 20px; border: 2px solid #ccc; margin-left: 10px; }
-        webview { width: 100%; height: 100%; }
-        .safety-indicator { display: inline-block; padding: 5px 10px; background: #28a745; color: white; border-radius: 4px; margin: 10px; }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>🛡️ SafeHarbor Browser</h1>
-        <div>
-            <button class="nav-btn" onclick="goBack()">← Back</button>
-            <button class="nav-btn" onclick="goForward()">→ Forward</button>
-            <button class="nav-btn" onclick="goHome()">🏠 Home</button>
-            <button class="nav-btn" onclick="showHelp()">❓ Help</button>
-        </div>
-        <div>
-            <span class="safety-indicator" id="safety">🛡️ Safe</span>
-            <input type="text" class="address-bar" id="urlbar" placeholder="Enter website (e.g., amazon.com)" value="https://amazon.com">
-            <button class="go-btn" onclick="navigate()">Go</button>
-        </div>
-    </div>
-    
-    <div class="main">
-        <div class="web-content">
-            <webview id="webview" src="https://amazon.com" allowpopups="false"></webview>
-        </div>
-        <div class="ai-sidebar">
-            <h3>SafeGuide Assistant</h3>
-            <p>👋 Hello! I am SafeGuide, your internet safety assistant.</p>
-            <p>I help seniors browse safely by:</p>
-            <ul>
-                <li>🛡️ Checking website safety</li>
-                <li>⚠️ Warning about scams</li>
-                <li>💬 Answering safety questions</li>
-                <li>🏆 Recommending trusted sites</li>
-            </ul>
-            <p><strong>Try visiting:</strong></p>
-            <ul>
-                <li>amazon.com (safe shopping)</li>
-                <li>aarp.org (senior resources)</li>
-                <li>medicare.gov (official site)</li>
-            </ul>
-        </div>
-    </div>
-
-    <script>
-        const webview = document.getElementById("webview");
-        const urlbar = document.getElementById("urlbar");
-        const safety = document.getElementById("safety");
-        
-        function navigate() {
-            let url = urlbar.value;
-            if (!url.startsWith("http")) url = "https://" + url;
-            webview.src = url;
-            checkSafety(url);
+        /* Premium Perplexity-Inspired Design System */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        function checkSafety(url) {
-            if (url.includes("amazon.com") || url.includes("aarp.org") || url.includes("medicare.gov")) {
-                safety.innerHTML = "🛡️ Safe";
-                safety.style.background = "#28a745";
-            } else if (url.includes("urgent") || url.includes("act-now")) {
-                safety.innerHTML = "⚠️ Caution";
-                safety.style.background = "#ffc107";
-                safety.style.color = "#000";
-            } else {
-                safety.innerHTML = "❓ Unknown";
-                safety.style.background = "#6c757d";
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+            background: #ffffff;
+            color: #1d1d1f;
+            font-size: 17px;
+            line-height: 1.7;
+            height: 100vh;
+            overflow: hidden;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Elegant Header - Premium Minimalism */
+        .header { 
+            background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 32px 40px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .brand h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #007AFF;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #007AFF 0%, #0066CC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .brand-shield {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #007AFF 0%, #0066CC 50%, #004C99 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.25), 
+                        0 1px 4px rgba(0, 122, 255, 0.15);
+            position: relative;
+        }
+        
+        .brand-shield::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+            border-radius: 12px;
+        }
+        
+        .header-controls {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .control-button {
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 500;
+            color: #1d1d1f;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .control-button:hover {
+            background: rgba(247, 247, 247, 0.95);
+            border-color: rgba(0, 0, 0, 0.12);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Main Layout - Conversational First */
+        .main-content-area { 
+            display: flex;
+            height: calc(100vh - 140px);
+            background: #ffffff;
+        }
+        
+        /* AI Sidebar - Collapsible (35% width, more browsing space) */
+        .ai-sidebar { 
+            flex: 0 0 35%;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid rgba(0, 0, 0, 0.06);
+            order: 2;
+            transition: flex-basis 0.3s ease-out;
+            overflow: hidden;
+        }
+        
+        .ai-sidebar.collapsed {
+            flex: 0 0 50px;
+        }
+        
+        .ai-sidebar .content-area {
+            transition: opacity 0.2s ease-out;
+        }
+        
+        .ai-sidebar.collapsed .content-area {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .ai-header {
+            padding: 40px 36px 32px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-toggle-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            color: #6e6e73;
+            transition: background-color 0.2s ease;
+            z-index: 10;
+        }
+        
+        .ai-toggle-button:hover {
+            background: #f0f0f0;
+        }
+        
+        .ai-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .ai-subtitle {
+            font-size: 19px;
+            color: #6e6e73;
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 280px;
+            margin: 0 auto;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Premium Chat Interface */
+        .chat-window {
+            flex: 1;
+            padding: 32px 36px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        
+        .chat-message {
+            padding: 24px 28px;
+            border-radius: 20px;
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 90%;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            letter-spacing: -0.01em;
+        }
+        
+        .assistant-message {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            color: #1d1d1f;
+            align-self: flex-start;
+            border-bottom-left-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        
+        .user-message {
+            background: linear-gradient(135deg, #007AFF 0%, #0066CC 100%);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.2);
+        }
+        
+        .chat-message p {
+            margin-bottom: 16px;
+        }
+        
+        .chat-message p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .chat-message strong {
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        
+        .chat-message ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        .chat-message li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        .recommended-sites {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            display: grid;
+            gap: 12px;
+        }
+        
+        .recommended-sites a {
+            color: #007AFF;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 16px 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.06) 0%, rgba(0, 122, 255, 0.02) 100%);
+            display: block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 122, 255, 0.1);
+        }
+        
+        .recommended-sites a:hover {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.12) 0%, rgba(0, 122, 255, 0.06) 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.15);
+        }
+        
+        /* Elegant Chat Input */
+        .chat-input-area {
+            padding: 32px 36px 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            background: linear-gradient(180deg, transparent 0%, rgba(248, 249, 250, 0.5) 100%);
+        }
+        
+        .input-container {
+            position: relative;
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+        }
+        
+        #user-input {
+            flex: 1;
+            padding: 18px 24px;
+            font-size: 17px;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            resize: none;
+            min-height: 56px;
+            line-height: 1.5;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        #user-input:focus {
+            outline: none;
+            border-color: #007AFF;
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1), 
+                        0 4px 16px rgba(0, 122, 255, 0.08);
+            background: #ffffff;
+        }
+        
+        #send-button {
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #007AFF 0%, #0066CC 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.2);
+            height: 56px;
+            min-width: 80px;
+        }
+        
+        #send-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
+            background: linear-gradient(135deg, #0066CC 0%, #004C99 100%);
+        }
+        
+        /* Browser Panel - Supporting Role (65% width, more space) */
+        .browser-panel { 
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            order: 1;
+        }
+        
+        /* Refined Address Bar */
+        .address-bar-container {
+            padding: 28px 32px;
+            background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .safety-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            min-width: 140px;
+            transition: all 0.3s ease;
+            letter-spacing: -0.01em;
+        }
+        
+        .safety-indicator.safe {
+            background: linear-gradient(135deg, rgba(52, 199, 89, 0.08) 0%, rgba(52, 199, 89, 0.04) 100%);
+            color: #28a745;
+            border: 1px solid rgba(52, 199, 89, 0.15);
+        }
+        
+        .safety-indicator.warning {
+            background: linear-gradient(135deg, rgba(255, 149, 0, 0.08) 0%, rgba(255, 149, 0, 0.04) 100%);
+            color: #f57c00;
+            border: 1px solid rgba(255, 149, 0, 0.15);
+        }
+        
+        .safety-indicator.danger {
+            background: linear-gradient(135deg, rgba(255, 59, 48, 0.08) 0%, rgba(255, 59, 48, 0.04) 100%);
+            color: #dc3545;
+            border: 1px solid rgba(255, 59, 48, 0.15);
+        }
+        
+        .safety-icon {
+            font-size: 18px;
+        }
+        
+        .url-input { 
+            flex: 1;
+            padding: 18px 24px;
+            font-size: 16px;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .url-input:focus {
+            outline: none;
+            border-color: #007AFF;
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1), 
+                        0 4px 16px rgba(0, 122, 255, 0.08);
+            background: #ffffff;
+        }
+        
+        .go-button { 
+            padding: 18px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #007AFF 0%, #0066CC 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.2);
+        }
+        
+        .go-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
+            background: linear-gradient(135deg, #0066CC 0%, #004C99 100%);
+        }
+        
+        /* Refined Toolbar */
+        .toolbar {
+            padding: 20px 32px;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            gap: 16px;
+        }
+        
+        .toolbar-button {
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1d1d1f;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .toolbar-button:hover {
+            background: rgba(247, 247, 247, 0.95);
+            border-color: rgba(0, 0, 0, 0.12);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        
+        .toolbar-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Webview Container */
+        .webview-container {
+            flex: 1;
+            background: #ffffff;
+            position: relative;
+            border-radius: 0;
+        }
+        
+        webview { 
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Premium Scrollbar */
+        .chat-window::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .chat-window::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .chat-window::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        
+        .chat-window::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Elegant Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
         
-        function goBack() { if (webview.canGoBack()) webview.goBack(); }
-        function goForward() { if (webview.canGoForward()) webview.goForward(); }
-        function goHome() { urlbar.value = "https://amazon.com"; navigate(); }
-        function showHelp() { 
-            alert("SafeHarbor Browser Help:
-
-🛡️ Green = Safe website
-⚠️ Yellow = Be careful
-❓ Gray = Unknown site
-
-Always look for the safety indicator before entering personal information!");
+        .chat-message {
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="brand">
+                <div class="brand-shield">🛡️</div>
+                <h1>SafeHarbor</h1>
+            </div>
+            <div class="header-controls">
+                <button class="control-button" id="font-size-toggle" title="Adjust Text Size">Aa</button>
+                <button class="control-button" id="contrast-toggle" title="Toggle Contrast">◐</button>
+            </div>
+        </header>
         
-        webview.addEventListener("did-navigate", function(e) {
-            urlbar.value = e.url;
-            checkSafety(e.url);
-        });
-    </script>
+        <div class="main-content-area">
+            <aside class="ai-sidebar" id="ai-sidebar">
+                <button class="ai-toggle-button" id="ai-toggle" title="Toggle SafeGuide">→</button>
+                <div class="content-area">
+                    <div class="ai-header">
+                        <h2>SafeGuide</h2>
+                        <p class="ai-subtitle">Your intelligent companion for confident, secure browsing</p>
+                    </div>
+                    
+                    <div class="chat-window" id="chat-window">
+                    <div class="chat-message assistant-message">
+                        <p>👋 <strong>Welcome to SafeHarbor</strong></p>
+                        <p>I'm SafeGuide, your personal internet safety expert. I'm here to help you browse with complete confidence and peace of mind.</p>
+                    </div>
+                    <div class="chat-message assistant-message">
+                        <p><strong>Here's how I protect you:</strong></p>
+                        <ul>
+                            <li>🛡️ Real-time website safety analysis</li>
+                            <li>⚠️ Scam and phishing detection</li>
+                            <li>💡 Personalized security guidance</li>
+                            <li>🔐 Safe browsing recommendations</li>
+                            <li>💬 Instant help whenever you need it</li>
+                        </ul>
+                    </div>
+                    <div class="chat-message assistant-message">
+                        <p><strong>Start with these trusted destinations:</strong></p>
+                        <div class="recommended-sites">
+                            <a href="#" data-url="https://www.amazon.com">🛒 Amazon.com — Safe online shopping</a>
+                            <a href="#" data-url="https://www.aarp.org">👥 AARP.org — Trusted senior resources</a>
+                            <a href="#" data-url="https://www.medicare.gov">🏥 Medicare.gov — Official health information</a>
+                            <a href="#" data-url="https://www.ssa.gov">🏛️ SSA.gov — Social Security services</a>
+                        </div>
+                    </div>
+                </div>
+                
+                                    <div class="chat-input-area">
+                        <div class="input-container">
+                            <input type="text" id="user-input" placeholder="Ask me anything about staying safe online...">
+                            <button id="send-button">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            
+            <div class="browser-panel">
+                <div class="address-bar-container">
+                    <div class="safety-indicator safe" id="safety-indicator">
+                        <span class="safety-icon">🛡️</span>
+                        <span class="safety-text">Verified Safe</span>
+                    </div>
+                    <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Enter website address...">
+                    <button id="go-button" class="go-button">Go</button>
+                </div>
+                
+                <div class="toolbar">
+                    <button class="toolbar-button" id="back-button">← Back</button>
+                    <button class="toolbar-button" id="forward-button">Forward →</button>
+                    <button class="toolbar-button" id="home-button">🏠 Home</button>
+                    <button class="toolbar-button" id="bookmarks-button">⭐ Bookmarks</button>
+                    <button class="toolbar-button" id="help-button">Help</button>
+                </div>
+                
+                <div class="webview-container">
+                    <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js"></webview>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./browser.js"></script>
+    <script src="./ai-assistant.js"></script>
 </body>
 </html>
