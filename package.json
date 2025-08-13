@@ -1,0 +1,13 @@
+{
+  "name": "safeharbor-mini-browser",
+  "version": "1.0.0",
+  "description": "SafeHarbor Browser - Secure browsing for seniors",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^37.0.0"
+  }
+}

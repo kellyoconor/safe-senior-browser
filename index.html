@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SafeHarbor Browser</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; font-size: 18px; }
+        .header { background: #f0f0f0; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        .nav-btn { padding: 10px 20px; margin: 5px; font-size: 16px; border: none; background: #007acc; color: white; border-radius: 4px; cursor: pointer; }
+        .nav-btn:hover { background: #005a99; }
+        .address-bar { width: 60%; padding: 10px; font-size: 16px; margin: 10px; }
+        .go-btn { padding: 10px 20px; font-size: 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .main { display: flex; height: 500px; }
+        .web-content { flex: 1; border: 2px solid #ccc; }
+        .ai-sidebar { width: 300px; background: #f8f9fa; padding: 20px; border: 2px solid #ccc; margin-left: 10px; }
+        webview { width: 100%; height: 100%; }
+        .safety-indicator { display: inline-block; padding: 5px 10px; background: #28a745; color: white; border-radius: 4px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ SafeHarbor Browser</h1>
+        <div>
+            <button class="nav-btn" onclick="goBack()">← Back</button>
+            <button class="nav-btn" onclick="goForward()">→ Forward</button>
+            <button class="nav-btn" onclick="goHome()">🏠 Home</button>
+            <button class="nav-btn" onclick="showHelp()">❓ Help</button>
+        </div>
+        <div>
+            <span class="safety-indicator" id="safety">🛡️ Safe</span>
+            <input type="text" class="address-bar" id="urlbar" placeholder="Enter website (e.g., amazon.com)" value="https://amazon.com">
+            <button class="go-btn" onclick="navigate()">Go</button>
+        </div>
+    </div>
+    
+    <div class="main">
+        <div class="web-content">
+            <webview id="webview" src="https://amazon.com" allowpopups="false"></webview>
+        </div>
+        <div class="ai-sidebar">
+            <h3>SafeGuide Assistant</h3>
+            <p>👋 Hello! I am SafeGuide, your internet safety assistant.</p>
+            <p>I help seniors browse safely by:</p>
+            <ul>
+                <li>🛡️ Checking website safety</li>
+                <li>⚠️ Warning about scams</li>
+                <li>💬 Answering safety questions</li>
+                <li>🏆 Recommending trusted sites</li>
+            </ul>
+            <p><strong>Try visiting:</strong></p>
+            <ul>
+                <li>amazon.com (safe shopping)</li>
+                <li>aarp.org (senior resources)</li>
+                <li>medicare.gov (official site)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const webview = document.getElementById("webview");
+        const urlbar = document.getElementById("urlbar");
+        const safety = document.getElementById("safety");
+        
+        function navigate() {
+            let url = urlbar.value;
+            if (!url.startsWith("http")) url = "https://" + url;
+            webview.src = url;
+            checkSafety(url);
+        }
+        
+        function checkSafety(url) {
+            if (url.includes("amazon.com") || url.includes("aarp.org") || url.includes("medicare.gov")) {
+                safety.innerHTML = "🛡️ Safe";
+                safety.style.background = "#28a745";
+            } else if (url.includes("urgent") || url.includes("act-now")) {
+                safety.innerHTML = "⚠️ Caution";
+                safety.style.background = "#ffc107";
+                safety.style.color = "#000";
+            } else {
+                safety.innerHTML = "❓ Unknown";
+                safety.style.background = "#6c757d";
+            }
+        }
+        
+        function goBack() { if (webview.canGoBack()) webview.goBack(); }
+        function goForward() { if (webview.canGoForward()) webview.goForward(); }
+        function goHome() { urlbar.value = "https://amazon.com"; navigate(); }
+        function showHelp() { 
+            alert("SafeHarbor Browser Help:
+
+🛡️ Green = Safe website
+⚠️ Yellow = Be careful
+❓ Gray = Unknown site
+
+Always look for the safety indicator before entering personal information!");
+        }
+        
+        webview.addEventListener("did-navigate", function(e) {
+            urlbar.value = e.url;
+            checkSafety(e.url);
+        });
+    </script>
+</body>
+</html>
