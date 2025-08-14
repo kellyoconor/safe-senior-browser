@@ -3,6 +3,29 @@
 <head>
     <title>SafeHarbor Browser</title>
     <style>
+        /* Premium Icon System */
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .icon-sm { width: 16px; height: 16px; }
+        .icon-md { width: 20px; height: 20px; }
+        .icon-lg { width: 24px; height: 24px; }
+        .icon-xl { width: 32px; height: 32px; }
+        .icon-2xl { width: 48px; height: 48px; }
+        
+        .icon svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
         /* Comet-Inspired Premium Design System */
         * {
             margin: 0;
@@ -764,18 +787,244 @@
         .safety-indicator.updating {
             animation: pulse 1s ease-in-out;
         }
+        
+        /* Persistent Safety Ribbon */
+        .safety-ribbon {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: -0.01em;
+        }
+        
+        .safety-ribbon.safe {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.08) 100%);
+            color: #059669;
+            border-bottom-color: rgba(34, 197, 94, 0.15);
+        }
+        
+        .safety-ribbon.warning {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.12) 0%, rgba(251, 146, 60, 0.08) 100%);
+            color: #ea580c;
+            border-bottom-color: rgba(251, 146, 60, 0.15);
+        }
+        
+        .safety-ribbon.danger {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(239, 68, 68, 0.08) 100%);
+            color: #dc2626;
+            border-bottom-color: rgba(239, 68, 68, 0.15);
+        }
+        
+        .safety-ribbon-icon {
+            display: inline-block;
+            margin-right: 6px;
+            font-size: 14px;
+        }
+        
+        /* High Contrast Mode for Readability */
+        body.high-contrast {
+            background: #000000 !important;
+            color: #ffffff !important;
+        }
+        
+        body.high-contrast .header {
+            background: #1a1a1a !important;
+            border-bottom-color: #333333 !important;
+        }
+        
+        body.high-contrast .brand h1 {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+        
+        body.high-contrast .control-button,
+        body.high-contrast .toolbar-button,
+        body.high-contrast .ai-toggle-button {
+            background: #333333 !important;
+            color: #ffffff !important;
+            border-color: #666666 !important;
+        }
+        
+        body.high-contrast .browser-panel,
+        body.high-contrast .ai-sidebar {
+            background: #1a1a1a !important;
+        }
+        
+        body.high-contrast .address-bar-container,
+        body.high-contrast .toolbar,
+        body.high-contrast .ai-header,
+        body.high-contrast .chat-input-area {
+            background: #2a2a2a !important;
+            border-color: #333333 !important;
+        }
+        
+        body.high-contrast .url-input,
+        body.high-contrast #user-input {
+            background: #333333 !important;
+            color: #ffffff !important;
+            border-color: #666666 !important;
+        }
+        
+        body.high-contrast .chat-message.assistant-message {
+            background: #333333 !important;
+            color: #ffffff !important;
+            border-color: #666666 !important;
+        }
+        
+        body.high-contrast .safety-ribbon {
+            background: #2a2a2a !important;
+            color: #ffffff !important;
+            border-color: #333333 !important;
+        }
     </style>
 </head>
 <body>
+    <!-- SVG Icon Definitions -->
+    <svg style="display: none;">
+        <defs>
+            <!-- Shield Icon -->
+            <symbol id="icon-shield" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Warning Triangle -->
+            <symbol id="icon-warning" viewBox="0 0 24 24">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="17" r="1" fill="currentColor"/>
+            </symbol>
+            
+            <!-- Alert Circle -->
+            <symbol id="icon-alert" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                <line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="16" r="1" fill="currentColor"/>
+            </symbol>
+            
+            <!-- Search -->
+            <symbol id="icon-search" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Arrow Left -->
+            <symbol id="icon-arrow-left" viewBox="0 0 24 24">
+                <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="12,19 5,12 12,5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Arrow Right -->
+            <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="12,5 19,12 12,19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Home -->
+            <symbol id="icon-home" viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Star (Bookmarks) -->
+            <symbol id="icon-star" viewBox="0 0 24 24">
+                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Help Circle -->
+            <symbol id="icon-help" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="17" r="1" fill="currentColor"/>
+            </symbol>
+            
+            <!-- Type (Font Size) -->
+            <symbol id="icon-type" viewBox="0 0 24 24">
+                <polyline points="4,7 4,4 20,4 20,7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="9" y1="20" x2="15" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Contrast (Sun/Moon) -->
+            <symbol id="icon-contrast" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/>
+                <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Chevron Right -->
+            <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+                <polyline points="9,18 15,12 9,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Send -->
+            <symbol id="icon-send" viewBox="0 0 24 24">
+                <line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polygon points="22,2 15,22 11,13 2,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Shopping Cart -->
+            <symbol id="icon-shopping" viewBox="0 0 24 24">
+                <circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Users -->
+            <symbol id="icon-users" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Heart (Health) -->
+            <symbol id="icon-heart" viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <!-- Building (Government) -->
+            <symbol id="icon-building" viewBox="0 0 24 24">
+                <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18H6z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="6" y1="12" x2="18" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="6" y1="16" x2="18" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="6" y1="8" x2="18" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+        </defs>
+    </svg>
     <div class="app-container">
         <header class="header">
             <div class="brand">
-                <div class="brand-shield">🛡️</div>
+                <div class="brand-shield">
+                    <svg class="icon icon-lg">
+                        <use href="#icon-shield"></use>
+                    </svg>
+                </div>
                 <h1>SafeHarbor</h1>
             </div>
             <div class="header-controls">
-                <button class="control-button" id="font-size-toggle" title="Adjust Text Size">Aa</button>
-                <button class="control-button" id="contrast-toggle" title="Toggle Contrast">◐</button>
+                <button class="control-button" id="font-size-toggle" title="Adjust Text Size">
+                    <svg class="icon icon-md">
+                        <use href="#icon-type"></use>
+                    </svg>
+                </button>
+                <button class="control-button" id="contrast-toggle" title="Toggle Contrast">
+                    <svg class="icon icon-md">
+                        <use href="#icon-contrast"></use>
+                    </svg>
+                </button>
             </div>
         </header>
         
@@ -783,8 +1032,10 @@
             <div class="browser-panel">
                 <div class="address-bar-container">
                     <div class="safety-indicator safe" id="safety-indicator">
-                        <span class="safety-icon">🛡️</span>
-                        <span class="safety-text">Verified Safe</span>
+                        <svg class="icon icon-lg safety-icon">
+                            <use href="#icon-shield"></use>
+                        </svg>
+                        <span class="safety-text">This site is safe to use</span>
                     </div>
                     <div style="position: relative; flex: 1; min-width: 0;">
                         <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely...">
@@ -794,48 +1045,128 @@
                 </div>
                 
                 <div class="toolbar">
-                    <button class="toolbar-button" id="back-button">← Back</button>
-                    <button class="toolbar-button" id="forward-button">Forward →</button>
-                    <button class="toolbar-button" id="home-button">🏠 Home</button>
-                    <button class="toolbar-button" id="bookmarks-button">⭐ Bookmarks</button>
-                    <button class="toolbar-button" id="help-button">Help</button>
+                    <button class="toolbar-button" id="back-button">
+                        <svg class="icon icon-sm">
+                            <use href="#icon-arrow-left"></use>
+                        </svg>
+                        Back
+                    </button>
+                    <button class="toolbar-button" id="forward-button">
+                        Forward
+                        <svg class="icon icon-sm">
+                            <use href="#icon-arrow-right"></use>
+                        </svg>
+                    </button>
+                    <button class="toolbar-button" id="home-button">
+                        <svg class="icon icon-sm">
+                            <use href="#icon-home"></use>
+                        </svg>
+                        Home
+                    </button>
+                    <button class="toolbar-button" id="bookmarks-button">
+                        <svg class="icon icon-sm">
+                            <use href="#icon-star"></use>
+                        </svg>
+                        Bookmarks
+                    </button>
+                    <button class="toolbar-button" id="help-button">
+                        <svg class="icon icon-sm">
+                            <use href="#icon-help"></use>
+                        </svg>
+                        Help
+                    </button>
                 </div>
                 
                 <div class="webview-container">
+                    <div class="safety-ribbon safe" id="safety-ribbon">
+                        <svg class="icon icon-sm safety-ribbon-icon">
+                            <use href="#icon-shield"></use>
+                        </svg>
+                        <span>SafeHarbor is keeping you safe • This site is verified and secure to browse</span>
+                    </div>
                     <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js"></webview>
                 </div>
             </div>
             
             <aside class="ai-sidebar" id="ai-sidebar">
-                <button class="ai-toggle-button" id="ai-toggle" title="Toggle SafeGuide">→</button>
+                <button class="ai-toggle-button" id="ai-toggle" title="Toggle SafeGuide">
+                    <svg class="icon icon-sm">
+                        <use href="#icon-chevron-right"></use>
+                    </svg>
+                </button>
                 <div class="content-area">
                     <div class="ai-header">
                         <h2>SafeGuide</h2>
-                        <p class="ai-subtitle">Your intelligent companion for secure, confident browsing</p>
+                        <p class="ai-subtitle">Your trusted companion for safe and worry-free browsing</p>
                     </div>
                     
                     <div class="chat-window" id="chat-window">
                         <div class="chat-message assistant-message">
-                            <p>👋 <strong>Welcome to SafeHarbor</strong></p>
-                            <p>I'm SafeGuide, your personal AI security expert. I analyze every site in real-time to keep you safe online.</p>
+                            <p><strong>Welcome to SafeHarbor</strong></p>
+                            <p>I'm SafeGuide, your personal online safety companion. I'm here to protect you and make sure every website you visit is safe and secure.</p>
                         </div>
                         <div class="chat-message assistant-message">
-                            <p><strong>How I protect you:</strong></p>
+                            <p><strong>Here's how I keep you safe:</strong></p>
                             <ul>
-                                <li>🛡️ Real-time website safety analysis</li>
-                                <li>⚠️ Advanced scam and phishing detection</li>
-                                <li>💡 Intelligent security recommendations</li>
-                                <li>🔐 Safe browsing guidance</li>
-                                <li>💬 Instant help when you need it</li>
+                                <li>
+                                    <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                                        <use href="#icon-shield"></use>
+                                    </svg>
+                                    I check every website for safety before you browse
+                                </li>
+                                <li>
+                                    <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                                        <use href="#icon-warning"></use>
+                                    </svg>
+                                    I spot scams and fake websites right away
+                                </li>
+                                <li>
+                                    <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                                        <use href="#icon-search"></use>
+                                    </svg>
+                                    I give you helpful tips to stay secure
+                                </li>
+                                <li>
+                                    <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                                        <use href="#icon-shield"></use>
+                                    </svg>
+                                    I help you browse with confidence
+                                </li>
+                                <li>
+                                    <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                                        <use href="#icon-help"></use>
+                                    </svg>
+                                    I'm always here when you need help
+                                </li>
                             </ul>
                         </div>
                         <div class="chat-message assistant-message">
                             <p><strong>Start with these trusted sites:</strong></p>
                             <div class="recommended-sites">
-                                <a href="#" data-url="https://www.amazon.com">🛒 Amazon — Safe online shopping</a>
-                                <a href="#" data-url="https://www.aarp.org">👥 AARP — Trusted senior resources</a>
-                                <a href="#" data-url="https://www.medicare.gov">🏥 Medicare — Official health info</a>
-                                <a href="#" data-url="https://www.ssa.gov">🏛️ Social Security — Government services</a>
+                                <a href="#" data-url="https://www.amazon.com">
+                                    <svg class="icon icon-sm" style="margin-right: 8px;">
+                                        <use href="#icon-shopping"></use>
+                                    </svg>
+                                    Amazon — Safe online shopping
+                                </a>
+                                <a href="#" data-url="https://www.aarp.org">
+                                    <svg class="icon icon-sm" style="margin-right: 8px;">
+                                        <use href="#icon-users"></use>
+                                    </svg>
+                                    AARP — Trusted senior resources
+                                </a>
+                                <a href="#" data-url="https://www.medicare.gov">
+                                    <svg class="icon icon-sm" style="margin-right: 8px;">
+                                        <use href="#icon-heart"></use>
+                                    </svg>
+                                    Medicare — Official health info
+                                </a>
+                                <a href="#" data-url="https://www.ssa.gov">
+                                    <svg class="icon icon-sm" style="margin-right: 8px;">
+                                        <use href="#icon-building"></use>
+                                    </svg>
+                                    Social Security — Government services
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -843,7 +1174,11 @@
                     <div class="chat-input-area">
                         <div class="input-container">
                             <input type="text" id="user-input" placeholder="Ask me anything about online safety...">
-                            <button id="send-button">Send</button>
+                            <button id="send-button">
+                                <svg class="icon icon-sm">
+                                    <use href="#icon-send"></use>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>

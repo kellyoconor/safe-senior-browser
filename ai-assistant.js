@@ -92,55 +92,185 @@ class SafeGuideAI {
         const lowerMessage = userMessage.toLowerCase();
         const domain = this.extractDomain(this.currentUrl);
         
-        // Contextual, sophisticated responses based on current browsing
+        // Contextual, senior-friendly responses based on current browsing
         if (lowerMessage.includes('safe') || lowerMessage.includes('secure')) {
-            return `🛡️ <strong>Safety Analysis Complete</strong><br><br>
-            The current site (${domain}) shows positive security indicators. Here's what I verified:<br><br>
-            ✅ Valid SSL certificate<br>
-            ✅ Known legitimate domain<br>
-            ✅ No reported security issues<br><br>
-            <em>Pro tip:</em> Always verify the URL matches exactly what you expect, especially for banking or shopping sites.`;
+            return `<div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <svg class="icon icon-lg" style="color: #059669; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                <strong>Great news! This website is safe to use</strong>
+            </div>
+            I've checked ${domain} and everything looks good. Here's what I found:<br><br>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                This website has proper security protection
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                It's a legitimate, trusted website
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                No safety concerns detected
+            </div>
+            <em>Helpful tip:</em> When visiting banking or shopping sites, always double-check that the web address matches exactly what you expect to see.`;
         }
         
         if (lowerMessage.includes('scam') || lowerMessage.includes('phishing')) {
-            return `🚨 <strong>Scam Detection Guide</strong><br><br>
-            I use advanced AI to spot these red flags:<br><br>
-            ⚠️ Urgent "act now" language<br>
-            ⚠️ Requests for passwords via email<br>
-            ⚠️ Too-good-to-be-true offers<br>
-            ⚠️ Unfamiliar sender domains<br>
-            ⚠️ Poor spelling/grammar<br><br>
-            <em>Current site safety:</em> No scam indicators detected on ${domain}.`;
+            return `<div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <svg class="icon icon-lg" style="color: #ea580c; margin-right: 8px;">
+                    <use href="#icon-warning"></use>
+                </svg>
+                <strong>How to Spot Online Scams</strong>
+            </div>
+            I'm always watching for these warning signs to keep you safe:<br><br>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                    <use href="#icon-warning"></use>
+                </svg>
+                Messages that say "act now or lose out"
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                    <use href="#icon-warning"></use>
+                </svg>
+                Emails asking for your password
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                    <use href="#icon-warning"></use>
+                </svg>
+                Offers that seem too good to be true
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                    <use href="#icon-warning"></use>
+                </svg>
+                Messages from unknown companies
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                    <use href="#icon-warning"></use>
+                </svg>
+                Lots of spelling mistakes
+            </div>
+            <em>Good news:</em> I haven't found any scam signs on ${domain} - you're safe here.`;
         }
         
         if (lowerMessage.includes('password') || lowerMessage.includes('login')) {
-            return `🔐 <strong>Password Security Best Practices</strong><br><br>
-            I recommend these proven strategies:<br><br>
-            💪 Use unique passwords for each site<br>
-            🔄 Enable two-factor authentication<br>
-            🚫 Never share passwords via email<br>
-            💾 Consider a reputable password manager<br>
-            🔄 Update passwords every 90 days<br><br>
-            <em>For this site:</em> ${domain} supports secure login practices.`;
+            return `<div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <svg class="icon icon-lg" style="color: #059669; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                <strong>Keeping Your Passwords Safe</strong>
+            </div>
+            Here are simple ways to protect your accounts:<br><br>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                Use a different password for each website
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                Turn on extra security when websites offer it
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                    <use href="#icon-warning"></use>
+                </svg>
+                Never give your password to anyone in an email
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                    <use href="#icon-help"></use>
+                </svg>
+                Consider using a password helper app
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                Change your passwords a few times a year
+            </div>
+            <em>About this site:</em> ${domain} uses proper security to protect your login information.`;
         }
         
         if (lowerMessage.includes('shopping') || lowerMessage.includes('buy')) {
-            return `🛒 <strong>Safe Shopping Analysis</strong><br><br>
-            For secure online shopping, I verify:<br><br>
-            ✅ Secure checkout process (https://)<br>
-            ✅ Trusted payment methods<br>
-            ✅ Clear return policy<br>
-            ✅ Verified seller ratings<br>
-            ✅ Contact information available<br><br>
-            <em>${domain} shopping safety:</em> This appears to be a trusted marketplace with buyer protection.`;
+            return `<div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <svg class="icon icon-lg" style="color: #3b82f6; margin-right: 8px;">
+                    <use href="#icon-shopping"></use>
+                </svg>
+                <strong>Safe Online Shopping Guide</strong>
+            </div>
+            When you shop online, I make sure:<br><br>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                Your payment information is protected
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                    <use href="#icon-shield"></use>
+                </svg>
+                The website accepts safe payment methods
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                    <use href="#icon-help"></use>
+                </svg>
+                You can return items if needed
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                    <use href="#icon-users"></use>
+                </svg>
+                Other customers have had good experiences
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                    <use href="#icon-help"></use>
+                </svg>
+                You can contact them if there's a problem
+            </div>
+            <em>About ${domain}:</em> This looks like a trustworthy shopping site that protects its customers.`;
         }
         
-        return `<strong>AI Safety Assistant Ready</strong><br><br>
-        I'm analyzing your browsing in real-time to keep you secure. I can help with:<br><br>
-        🔍 Website safety verification<br>
-        🛡️ Scam and phishing detection<br>
-        💡 Personalized security advice<br>
-        🔐 Password and login guidance<br><br>
+        return `<strong>I'm here to keep you safe online</strong><br><br>
+        I'm watching over your browsing to protect you. I can help with:<br><br>
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                <use href="#icon-search"></use>
+            </svg>
+            Checking if websites are safe to use
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                <use href="#icon-shield"></use>
+            </svg>
+            Spotting scams and fake websites
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                <use href="#icon-help"></use>
+            </svg>
+            Giving you personalized safety tips
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+            <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                <use href="#icon-shield"></use>
+            </svg>
+            Helping with passwords and logging in
+        </div>
         What would you like to know about staying safe on <em>${domain}</em>?`;
     }
 

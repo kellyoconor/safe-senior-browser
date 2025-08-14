@@ -143,34 +143,62 @@ class SafeHarborBrowser {
 
     getSafetyInfo(domain) {
         if (this.safetyData.safe.includes(domain)) {
-            return { level: 'safe', message: 'Safe Site', icon: '🛡️' };
+            return { 
+                level: 'safe', 
+                message: 'This site is safe to use', 
+                ribbonMessage: 'SafeHarbor is keeping you safe • This site is verified and secure to browse',
+                iconId: 'icon-shield' 
+            };
         } else if (this.safetyData.warning.some(w => domain.includes(w))) {
-            return { level: 'warning', message: 'Use Caution', icon: '⚠️' };
+            return { 
+                level: 'warning', 
+                message: 'Please be extra careful', 
+                ribbonMessage: 'Caution: Limited safety information • Be careful with personal details',
+                iconId: 'icon-warning' 
+            };
         } else if (this.safetyData.danger.some(d => domain.includes(d))) {
-            return { level: 'danger', message: 'Potentially Unsafe', icon: '🚨' };
+            return { 
+                level: 'danger', 
+                message: 'This site may not be safe', 
+                ribbonMessage: 'Warning: This site may not be safe • Consider leaving immediately',
+                iconId: 'icon-alert' 
+            };
         } else {
-            return { level: 'safe', message: 'Checking...', icon: '🔍' };
+            return { 
+                level: 'safe', 
+                message: 'Checking safety...', 
+                ribbonMessage: 'SafeHarbor is checking this site for you • One moment please',
+                iconId: 'icon-search' 
+            };
         }
     }
 
     updateSafetyIndicator(safetyInfo) {
         const indicator = document.getElementById('safety-indicator');
-        const icon = indicator.querySelector('.safety-icon');
+        const icon = indicator.querySelector('.safety-icon use');
         const text = indicator.querySelector('.safety-text');
+        
+        const ribbon = document.getElementById('safety-ribbon');
+        const ribbonIcon = ribbon.querySelector('.safety-ribbon-icon use');
         
         // Add updating animation
         indicator.classList.add('updating');
         
         setTimeout(() => {
-            // Remove existing classes
+            // Update main safety indicator
             indicator.classList.remove('safe', 'warning', 'danger', 'updating');
-            
-            // Add new class
             indicator.classList.add(safetyInfo.level);
-            
-            // Update content with smooth transition
-            icon.textContent = safetyInfo.icon;
+            icon.setAttribute('href', `#${safetyInfo.iconId}`);
             text.textContent = safetyInfo.message;
+            
+            // Update safety ribbon with synchronized messaging
+            ribbon.classList.remove('safe', 'warning', 'danger');
+            ribbon.classList.add(safetyInfo.level);
+            ribbonIcon.setAttribute('href', `#${safetyInfo.iconId}`);
+            
+            // Update ribbon text content
+            const ribbonText = ribbon.querySelector('span:last-child') || ribbon.appendChild(document.createElement('span'));
+            ribbonText.textContent = safetyInfo.ribbonMessage;
             
             // Show contextual overlay for warnings/dangers
             if (safetyInfo.level !== 'safe') {
@@ -181,12 +209,24 @@ class SafeHarborBrowser {
 
     toggleFontSize() {
         const currentSize = parseInt(getComputedStyle(document.body).fontSize);
-        const newSize = currentSize >= 20 ? 16 : currentSize + 2;
+        const newSize = currentSize >= 24 ? 16 : currentSize + 2;
         document.body.style.fontSize = newSize + 'px';
+        
+        // Show friendly feedback
+        const button = document.getElementById('font-size-toggle');
+        const originalText = button.textContent;
+        button.textContent = newSize >= 24 ? 'Reset' : `${newSize}px`;
+        setTimeout(() => button.textContent = originalText, 1000);
     }
 
     toggleContrast() {
         document.body.classList.toggle('high-contrast');
+        
+        // Show friendly feedback
+        const button = document.getElementById('contrast-toggle');
+        const isHighContrast = document.body.classList.contains('high-contrast');
+        button.textContent = isHighContrast ? '●○' : '◐';
+        button.title = isHighContrast ? 'Switch to normal contrast' : 'Switch to high contrast';
     }
 
     showBookmarks() {
@@ -224,7 +264,9 @@ class SafeHarborBrowser {
         suggestionsContainer.innerHTML = suggestions.map(suggestion => `
             <div class="suggestion-item" data-url="${suggestion.url}">
                 <div class="suggestion-icon ${suggestion.safety}">
-                    ${suggestion.icon}
+                    <svg class="icon icon-sm">
+                        <use href="#${suggestion.iconId}"></use>
+                    </svg>
                 </div>
                 <div class="suggestion-text">
                     <div class="suggestion-title">${suggestion.title}</div>
@@ -266,7 +308,7 @@ class SafeHarborBrowser {
                     url: `https://www.${site.domain}`,
                     title: site.title,
                     description: site.description,
-                    icon: '🛡️',
+                    iconId: 'icon-shield',
                     safety: 'suggestion-safe'
                 });
             }
@@ -278,7 +320,7 @@ class SafeHarborBrowser {
                 url: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
                 title: `Search for "${query}"`,
                 description: 'Safe Google search',
-                icon: '🔍',
+                iconId: 'icon-search',
                 safety: 'suggestion-safe'
             });
         }
@@ -296,29 +338,56 @@ class SafeHarborBrowser {
         const content = document.getElementById('ai-overlay-content');
         
         const alertContent = safetyInfo.level === 'warning' 
-            ? `<h3>⚠️ Proceed with Caution</h3>
-               <p>I don't have complete safety information about this site. Please be extra careful and avoid entering personal information.</p>
-               <div style="margin-top: 16px; display: flex; gap: 8px;">
-                   <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
-                           style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                       I'll be careful
-                   </button>
-                   <button onclick="window.browser.goBack(); this.closest('.ai-overlay').classList.remove('show')" 
-                           style="padding: 8px 16px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                       Go back
-                   </button>
+            ? `<div style="text-align: center;">
+                   <div style="margin-bottom: 16px;">
+                       <svg class="icon icon-2xl" style="color: #ea580c;">
+                           <use href="#icon-warning"></use>
+                       </svg>
+                   </div>
+                   <h3 style="font-size: 20px; margin-bottom: 12px; color: #ea580c;">Please be extra careful here</h3>
+                   <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+                       I don't have complete safety information about this website. To protect yourself:
+                       <br><br>
+                       • Don't enter passwords or personal information<br>
+                       • Be cautious of any download requests<br>
+                       • Leave if anything seems suspicious
+                   </p>
+                   <div style="display: flex; gap: 12px; justify-content: center;">
+                       <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
+                               style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                           I understand, continue
+                       </button>
+                       <button onclick="window.browser.goBack(); this.closest('.ai-overlay').classList.remove('show')" 
+                               style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #6b7280; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                           Take me back to safety
+                       </button>
+                   </div>
                </div>`
-            : `<h3>🚨 Security Warning</h3>
-               <p>This site may not be safe. I recommend leaving immediately to protect your personal information.</p>
-               <div style="margin-top: 16px; display: flex; gap: 8px;">
-                   <button onclick="window.browser.goBack(); this.closest('.ai-overlay').classList.remove('show')" 
-                           style="padding: 8px 16px; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                       Leave site
-                   </button>
-                   <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
-                           style="padding: 8px 16px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                       Ignore warning
-                   </button>
+            : `<div style="text-align: center;">
+                   <div style="margin-bottom: 16px;">
+                       <svg class="icon icon-2xl" style="color: #dc2626;">
+                           <use href="#icon-alert"></use>
+                       </svg>
+                   </div>
+                   <h3 style="font-size: 20px; margin-bottom: 12px; color: #dc2626;">This website may not be safe</h3>
+                   <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+                       For your protection, I strongly recommend leaving this site immediately. 
+                       This website might try to:
+                       <br><br>
+                       • Steal your personal information<br>
+                       • Install harmful software<br>
+                       • Trick you into sharing passwords
+                   </p>
+                   <div style="display: flex; gap: 12px; justify-content: center;">
+                       <button onclick="window.browser.goBack(); this.closest('.ai-overlay').classList.remove('show')" 
+                               style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #dc2626; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                           Yes, take me to safety
+                       </button>
+                       <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
+                               style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #6b7280; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                           I'll stay but be careful
+                       </button>
+                   </div>
                </div>`;
         
         content.innerHTML = alertContent;
