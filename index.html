@@ -26,7 +26,7 @@
             display: block;
         }
         
-        /* Comet-Inspired Premium Design System */
+        /* SafeHarbor Senior-Friendly Design System */
         * {
             margin: 0;
             padding: 0;
@@ -34,40 +34,30 @@
         }
         
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            color: #0f172a;
-            font-size: 16px;
-            line-height: 1.6;
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #FAFAF7; /* Off-white background for reduced eye strain */
+            color: #2E2E2E; /* Dark charcoal instead of pure black */
+            font-size: 18px; /* Larger base font for seniors */
+            line-height: 1.5;
             height: 100vh;
             overflow: hidden;
             font-weight: 400;
-            letter-spacing: -0.011em;
+            letter-spacing: normal;
         }
         
-        /* Comet-Style Minimal Chrome Header */
+        /* Senior-Friendly Header */
         .header { 
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            padding: 12px 24px 10px;
+            background: rgba(255, 255, 255, 0.85); /* Crisp white with subtle transparency */
+            backdrop-filter: blur(40px); /* Stronger blur for premium feel */
+            -webkit-backdrop-filter: blur(40px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 14px 28px; /* Perfect balance */
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: relative;
             z-index: 1000;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(147, 51, 234, 0.01) 100%);
-            pointer-events: none;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
         }
         
         .brand {
@@ -77,172 +67,158 @@
         }
         
         .brand h1 {
-            font-size: 19px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 50%, #1e3a8a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
+            font-size: 20px; /* Premium sizing */
+            font-weight: 700; /* Confident bold */
+            color: #1a1a1a; /* Deeper black */
+            letter-spacing: -0.4px; /* Tighter, more premium */
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         .brand-shield {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 50%, #1e3a8a 100%);
-            border-radius: 10px;
+            width: 32px; /* Slightly larger for premium feel */
+            height: 32px;
+            background: linear-gradient(135deg, #007AFF 0%, #0056CC 100%); /* iOS blue gradient */
+            border-radius: 8px; /* More rounded */
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 18px;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3), 
-                        0 2px 4px rgba(59, 130, 246, 0.2);
+            font-weight: 700;
+            box-shadow: 0 2px 12px rgba(0, 122, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
-        }
-        
-        .brand-shield::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
         }
         
         .header-controls {
             display: flex;
-            gap: 12px;
+            gap: 8px; /* Tighter spacing */
         }
         
         .control-button {
-            width: 32px;
-            height: 32px;
+            min-width: 38px; /* Perfect sizing */
+            height: 38px;
             border: 1px solid rgba(0, 0, 0, 0.06);
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 10px;
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 8px; /* More rounded for premium feel */
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 15px;
-            font-weight: 500;
-            color: #475569;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 13px;
+            font-weight: 600; /* Slightly bolder */
+            color: #374151; /* Neutral gray */
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 12px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         .control-button:hover {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.12);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
         }
         
-        /* Main Layout - Comet-Style */
+        /* Main Layout - Senior-Friendly */
         .main-content-area { 
-            display: flex;
-            height: calc(100vh - 92px);
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            display: block; /* Changed from flex since AI is now floating */
+            height: calc(100vh - 82px); /* Adjusted for new header height */
+            background: #FAFAF7; /* Off-white background */
         }
         
         /* Browser Panel - Clean Safari-like Chrome */
         .browser-panel { 
-            flex: 1;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             background: #ffffff;
-            order: 1;
-            border-radius: 0 0 0 16px;
             overflow: hidden;
-            box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.04);
             min-width: 0;
         }
         
         /* Comet-Style Smart Address Bar */
         .address-bar-container {
-            padding: 24px 32px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            padding: 20px 32px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: none; /* Remove separator for seamless feel */
         }
         
+        /* Unified Input Strip - Arc/Safari Style */
+        .unified-input-strip {
+            display: flex;
+            align-items: center;
+            background: rgba(248, 249, 250, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 12px; /* More rounded for modern feel */
+            padding: 12px 16px;
+            gap: 12px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .unified-input-strip:focus-within {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 122, 255, 0.3);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Ambient Safety Indicator - Built-in Feel */
         .safety-indicator {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 16px 18px;
-            border-radius: 14px;
-            font-size: 15px;
+            gap: 8px;
+            padding: 0; /* No extra padding - part of the flow */
+            background: none; /* No separate background */
+            border: none; /* No borders - ambient */
+            font-size: 14px;
             font-weight: 500;
-            min-width: 120px;
-            max-width: 120px;
+            color: #16a34a; /* Calm green */
             flex-shrink: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: -0.01em;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         .safety-indicator.safe {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
-            color: #059669;
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
+            color: #4CAF50;
         }
         
         .safety-indicator.warning {
-            background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, rgba(251, 146, 60, 0.05) 100%);
-            color: #ea580c;
-            border: 1px solid rgba(251, 146, 60, 0.2);
-            box-shadow: 0 2px 8px rgba(251, 146, 60, 0.1);
+            color: #F4B45C;
         }
         
         .safety-indicator.danger {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-            color: #dc2626;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+            color: #F44336;
         }
         
         .safety-icon {
             font-size: 18px;
         }
         
+        /* Seamless URL Input */
         .url-input { 
-            width: 100%;
-            padding: 20px 24px;
-            font-size: 18px;
-            border: 2px solid rgba(0, 0, 0, 0.04);
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: inherit;
-            letter-spacing: -0.01em;
-            min-height: 64px;
-            font-weight: 500;
+            flex: 1;
+            border: none; /* No borders - part of unified strip */
+            background: transparent; /* Transparent - uses strip background */
+            padding: 8px 0; /* Minimal padding */
+            font-size: 16px;
+            font-weight: 400;
+            color: #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: -0.1px;
             min-width: 0;
         }
         
         .url-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 
-                        0 4px 12px rgba(59, 130, 246, 0.1);
+            outline: none; /* Focus handled by container */
         }
         
         .url-input::placeholder {
-            color: #94a3b8;
+            color: #6b7280;
+            font-weight: 400;
         }
         
         .go-button { 
@@ -271,130 +247,154 @@
         }
         
         /* Minimal Toolbar */
+        /* Unified Toolbar - Consistent with Input Strip */
         .toolbar {
-            padding: 8px 20px;
-            background: rgba(248, 250, 252, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 12px 32px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: none; /* Seamless flow */
             display: flex;
-            gap: 6px;
+            gap: 2px; /* Tighter gap for grouping */
+        }
+        
+        /* Unified Button Group */
+        .unified-toolbar-group {
+            display: flex;
+            background: rgba(248, 249, 250, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 10px; /* Match input strip radius */
+            padding: 6px;
+            gap: 0;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
         
         .toolbar-button {
-            padding: 6px 12px;
+            padding: 8px 12px;
             font-size: 13px;
             font-weight: 500;
-            background: rgba(255, 255, 255, 0.8);
-            color: #475569;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            border-radius: 8px;
+            background: none; /* No individual backgrounds */
+            color: #374151;
+            border: none; /* No individual borders */
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         .toolbar-button:hover {
-            background: rgba(255, 255, 255, 0.95);
-            border-color: rgba(0, 0, 0, 0.06);
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.8);
+            color: #1a1a1a;
         }
         
         .toolbar-button:disabled {
             opacity: 0.4;
             cursor: not-allowed;
-            transform: none;
         }
         
-        /* Clean Webview */
+        /* Seamless Webview */
         .webview-container {
             flex: 1;
             background: #ffffff;
             position: relative;
-            border-radius: 12px 12px 0 0;
             overflow: hidden;
-            margin: 0 1px;
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+            margin: 0; /* Remove margins for seamless feel */
         }
         
         webview { 
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 12px 12px 0 0;
         }
         
-        /* Comet-Style AI Sidebar */
+        /* Integrated AI - Clean Right Sidebar */
         .ai-sidebar { 
-            flex: 0 0 40%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.8) 100%);
+            position: fixed;
+            top: 82px; /* Below new header */
+            right: -350px; /* Hidden off-screen initially */
+            bottom: 0;
+            width: 350px;
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(77, 144, 181, 0.1);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            border-left: 1px solid rgba(0, 0, 0, 0.04);
-            order: 2;
-            transition: flex-basis 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            position: relative;
-            min-height: 0;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
         }
         
-        .ai-sidebar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(147, 51, 234, 0.01) 100%);
-            pointer-events: none;
-        }
-        
-        .ai-sidebar.collapsed {
-            flex: 0 0 48px;
+        .ai-sidebar.expanded {
+            right: 0; /* Slide in from right */
         }
         
         .ai-sidebar .content-area {
-            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.3s ease;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 0;
             overflow: hidden;
-        }
-        
-        .ai-sidebar.collapsed .content-area {
-            opacity: 0;
+            opacity: 0; /* Hidden by default */
             pointer-events: none;
         }
         
-        .ai-toggle-button {
+        .ai-sidebar.expanded .content-area {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Subtle AI Trigger - Inline Companion */
+        .ai-trigger {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: none; /* No background - inline feel */
+            border: none;
+            border-radius: 6px;
+            color: #007AFF;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            flex-shrink: 0;
+        }
+        
+        .ai-trigger:hover {
+            background: rgba(0, 122, 255, 0.08);
+            color: #0056CC;
+        }
+        
+        .ai-close-button {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 28px;
-            height: 28px;
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 8px;
+            top: 20px;
+            left: 20px; /* Move to left side since it's a right sidebar */
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            border-radius: 50%;
+            color: #64748b;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            font-size: 12px;
-            color: #64748b;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 18px;
+            transition: all 0.2s ease;
             z-index: 10;
         }
         
-        .ai-toggle-button:hover {
-            background: rgba(255, 255, 255, 1);
-            border-color: rgba(0, 0, 0, 0.08);
+        .ai-close-button:hover {
+            background: rgba(0, 0, 0, 0.1);
             transform: scale(1.05);
         }
         
@@ -507,24 +507,24 @@
         }
         
         .recommended-sites a {
-            color: #3b82f6;
+            color: #2E2E2E;
             text-decoration: none;
             font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 8px;
-            background: rgba(59, 130, 246, 0.06);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 16px; /* More generous padding */
+            border-radius: 12px; /* Rounded card styling */
+            background: white;
             display: block;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(59, 130, 246, 0.1);
-            font-size: 13px;
+            transition: all 0.3s ease; /* Gentle animation */
+            border: 1px solid rgba(77, 144, 181, 0.1);
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Light shadow for card effect */
+            margin-bottom: 8px;
         }
         
         .recommended-sites a:hover {
-            background: rgba(59, 130, 246, 0.1);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            background: #FAFAF7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(77, 144, 181, 0.15);
         }
         
         /* Premium Chat Input */
@@ -1031,143 +1031,80 @@
         <div class="main-content-area">
             <div class="browser-panel">
                 <div class="address-bar-container">
-                    <div class="safety-indicator safe" id="safety-indicator">
-                        <svg class="icon icon-lg safety-icon">
-                            <use href="#icon-shield"></use>
-                        </svg>
-                        <span class="safety-text">This site is safe to use</span>
-                    </div>
-                    <div style="position: relative; flex: 1; min-width: 0;">
+                    <div class="unified-input-strip">
+                        <div class="safety-indicator safe" id="safety-indicator">
+                            <svg class="icon icon-sm safety-icon">
+                                <use href="#icon-shield"></use>
+                            </svg>
+                            Safe
+                        </div>
+                        
                         <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely...">
-                        <div class="address-suggestions" id="address-suggestions"></div>
+                        
+                        <div class="ai-trigger" id="ai-trigger">
+                            <svg class="icon icon-sm">
+                                <use href="#icon-help"></use>
+                            </svg>
+                            Ask SafeGuide
+                        </div>
                     </div>
-                    <button id="go-button" class="go-button">Go</button>
+                    <div class="address-suggestions" id="address-suggestions"></div>
                 </div>
                 
                 <div class="toolbar">
-                    <button class="toolbar-button" id="back-button">
-                        <svg class="icon icon-sm">
-                            <use href="#icon-arrow-left"></use>
-                        </svg>
-                        Back
-                    </button>
-                    <button class="toolbar-button" id="forward-button">
-                        Forward
-                        <svg class="icon icon-sm">
-                            <use href="#icon-arrow-right"></use>
-                        </svg>
-                    </button>
-                    <button class="toolbar-button" id="home-button">
-                        <svg class="icon icon-sm">
-                            <use href="#icon-home"></use>
-                        </svg>
-                        Home
-                    </button>
-                    <button class="toolbar-button" id="bookmarks-button">
-                        <svg class="icon icon-sm">
-                            <use href="#icon-star"></use>
-                        </svg>
-                        Bookmarks
-                    </button>
-                    <button class="toolbar-button" id="help-button">
-                        <svg class="icon icon-sm">
-                            <use href="#icon-help"></use>
-                        </svg>
-                        Help
-                    </button>
+                    <div class="unified-toolbar-group">
+                        <button class="toolbar-button" id="back-button">
+                            <svg class="icon icon-sm">
+                                <use href="#icon-arrow-left"></use>
+                            </svg>
+                            Back
+                        </button>
+                        <button class="toolbar-button" id="forward-button">
+                            <svg class="icon icon-sm">
+                                <use href="#icon-arrow-right"></use>
+                            </svg>
+                            Forward
+                        </button>
+                        <button class="toolbar-button" id="home-button">
+                            <svg class="icon icon-sm">
+                                <use href="#icon-home"></use>
+                            </svg>
+                            Home
+                        </button>
+                        <button class="toolbar-button" id="bookmarks-button">
+                            <svg class="icon icon-sm">
+                                <use href="#icon-star"></use>
+                            </svg>
+                            Bookmarks
+                        </button>
+                        <button class="toolbar-button" id="help-button">
+                            <svg class="icon icon-sm">
+                                <use href="#icon-help"></use>
+                            </svg>
+                            Help
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="webview-container">
-                    <div class="safety-ribbon safe" id="safety-ribbon">
-                        <svg class="icon icon-sm safety-ribbon-icon">
-                            <use href="#icon-shield"></use>
-                        </svg>
-                        <span>SafeHarbor is keeping you safe • This site is verified and secure to browse</span>
-                    </div>
                     <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js"></webview>
                 </div>
             </div>
             
             <aside class="ai-sidebar" id="ai-sidebar">
-                <button class="ai-toggle-button" id="ai-toggle" title="Toggle SafeGuide">
-                    <svg class="icon icon-sm">
-                        <use href="#icon-chevron-right"></use>
-                    </svg>
+                <button class="ai-close-button" id="ai-close" title="Close SafeGuide">
+                    ×
                 </button>
                 <div class="content-area">
                     <div class="ai-header">
                         <h2>SafeGuide</h2>
-                        <p class="ai-subtitle">Your trusted companion for safe and worry-free browsing</p>
+                        <p class="ai-subtitle">I've got your back while you browse</p>
                     </div>
                     
                     <div class="chat-window" id="chat-window">
                         <div class="chat-message assistant-message">
-                            <p><strong>Welcome to SafeHarbor</strong></p>
-                            <p>I'm SafeGuide, your personal online safety companion. I'm here to protect you and make sure every website you visit is safe and secure.</p>
-                        </div>
-                        <div class="chat-message assistant-message">
-                            <p><strong>Here's how I keep you safe:</strong></p>
-                            <ul>
-                                <li>
-                                    <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
-                                        <use href="#icon-shield"></use>
-                                    </svg>
-                                    I check every website for safety before you browse
-                                </li>
-                                <li>
-                                    <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
-                                        <use href="#icon-warning"></use>
-                                    </svg>
-                                    I spot scams and fake websites right away
-                                </li>
-                                <li>
-                                    <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
-                                        <use href="#icon-search"></use>
-                                    </svg>
-                                    I give you helpful tips to stay secure
-                                </li>
-                                <li>
-                                    <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
-                                        <use href="#icon-shield"></use>
-                                    </svg>
-                                    I help you browse with confidence
-                                </li>
-                                <li>
-                                    <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
-                                        <use href="#icon-help"></use>
-                                    </svg>
-                                    I'm always here when you need help
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="chat-message assistant-message">
-                            <p><strong>Start with these trusted sites:</strong></p>
-                            <div class="recommended-sites">
-                                <a href="#" data-url="https://www.amazon.com">
-                                    <svg class="icon icon-sm" style="margin-right: 8px;">
-                                        <use href="#icon-shopping"></use>
-                                    </svg>
-                                    Amazon — Safe online shopping
-                                </a>
-                                <a href="#" data-url="https://www.aarp.org">
-                                    <svg class="icon icon-sm" style="margin-right: 8px;">
-                                        <use href="#icon-users"></use>
-                                    </svg>
-                                    AARP — Trusted senior resources
-                                </a>
-                                <a href="#" data-url="https://www.medicare.gov">
-                                    <svg class="icon icon-sm" style="margin-right: 8px;">
-                                        <use href="#icon-heart"></use>
-                                    </svg>
-                                    Medicare — Official health info
-                                </a>
-                                <a href="#" data-url="https://www.ssa.gov">
-                                    <svg class="icon icon-sm" style="margin-right: 8px;">
-                                        <use href="#icon-building"></use>
-                                    </svg>
-                                    Social Security — Government services
-                                </a>
-                            </div>
+                            <p><strong>Hi there!</strong></p>
+                            <p>I'm here to help keep you safe online. Feel free to ask me anything.</p>
                         </div>
                     </div>
                     

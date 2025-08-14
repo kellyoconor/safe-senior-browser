@@ -27,7 +27,17 @@ class SafeGuideAI {
             if (e.key === 'Enter') this.sendMessage();
         });
 
-        document.getElementById('ai-toggle').addEventListener('click', () => this.toggleSidebar());
+        // Setup AI trigger and close buttons
+        const aiTrigger = document.getElementById('ai-trigger');
+        const aiClose = document.getElementById('ai-close');
+        
+        if (aiTrigger) {
+            aiTrigger.addEventListener('click', () => this.showAI());
+        }
+        
+        if (aiClose) {
+            aiClose.addEventListener('click', () => this.hideAI());
+        }
         this.setupRecommendedSites();
         window.aiAssistant = this;
     }
@@ -313,20 +323,20 @@ class SafeGuideAI {
         this.addMessage(helpMessage, 'assistant');
     }
 
-    toggleSidebar() {
+    showAI() {
         const sidebar = document.getElementById('ai-sidebar');
-        const toggleButton = document.getElementById('ai-toggle');
+        sidebar.classList.add('expanded');
         
-        sidebar.classList.toggle('collapsed');
-        
-        // Update button text based on state
-        if (sidebar.classList.contains('collapsed')) {
-            toggleButton.textContent = '←';
-            toggleButton.title = 'Expand SafeGuide';
-        } else {
-            toggleButton.textContent = '→';
-            toggleButton.title = 'Collapse SafeGuide';
-        }
+        // Auto-focus on the input when opened
+        setTimeout(() => {
+            const input = document.getElementById('user-input');
+            if (input) input.focus();
+        }, 300);
+    }
+    
+    hideAI() {
+        const sidebar = document.getElementById('ai-sidebar');
+        sidebar.classList.remove('expanded');
     }
 }
 

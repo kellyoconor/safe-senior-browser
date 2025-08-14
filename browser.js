@@ -145,29 +145,29 @@ class SafeHarborBrowser {
         if (this.safetyData.safe.includes(domain)) {
             return { 
                 level: 'safe', 
-                message: 'This site is safe to use', 
-                ribbonMessage: 'SafeHarbor is keeping you safe • This site is verified and secure to browse',
+                message: 'Safe', 
+                ribbonMessage: `I'll keep watch while you browse • You're safely on ${domain}`,
                 iconId: 'icon-shield' 
             };
         } else if (this.safetyData.warning.some(w => domain.includes(w))) {
             return { 
                 level: 'warning', 
-                message: 'Please be extra careful', 
-                ribbonMessage: 'Caution: Limited safety information • Be careful with personal details',
+                message: "Caution", 
+                ribbonMessage: "I don't have complete info on this site • Let's be extra cautious",
                 iconId: 'icon-warning' 
             };
         } else if (this.safetyData.danger.some(d => domain.includes(d))) {
             return { 
                 level: 'danger', 
-                message: 'This site may not be safe', 
-                ribbonMessage: 'Warning: This site may not be safe • Consider leaving immediately',
+                message: "Unsafe", 
+                ribbonMessage: "This site looks risky • I suggest we go somewhere safer",
                 iconId: 'icon-alert' 
             };
         } else {
             return { 
                 level: 'safe', 
-                message: 'Checking safety...', 
-                ribbonMessage: 'SafeHarbor is checking this site for you • One moment please',
+                message: 'Checking...', 
+                ribbonMessage: "I'm checking this site to make sure it's safe • Just a moment",
                 iconId: 'icon-search' 
             };
         }
@@ -178,9 +178,6 @@ class SafeHarborBrowser {
         const icon = indicator.querySelector('.safety-icon use');
         const text = indicator.querySelector('.safety-text');
         
-        const ribbon = document.getElementById('safety-ribbon');
-        const ribbonIcon = ribbon.querySelector('.safety-ribbon-icon use');
-        
         // Add updating animation
         indicator.classList.add('updating');
         
@@ -190,15 +187,6 @@ class SafeHarborBrowser {
             indicator.classList.add(safetyInfo.level);
             icon.setAttribute('href', `#${safetyInfo.iconId}`);
             text.textContent = safetyInfo.message;
-            
-            // Update safety ribbon with synchronized messaging
-            ribbon.classList.remove('safe', 'warning', 'danger');
-            ribbon.classList.add(safetyInfo.level);
-            ribbonIcon.setAttribute('href', `#${safetyInfo.iconId}`);
-            
-            // Update ribbon text content
-            const ribbonText = ribbon.querySelector('span:last-child') || ribbon.appendChild(document.createElement('span'));
-            ribbonText.textContent = safetyInfo.ribbonMessage;
             
             // Show contextual overlay for warnings/dangers
             if (safetyInfo.level !== 'safe') {
