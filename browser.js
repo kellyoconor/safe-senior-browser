@@ -24,10 +24,25 @@ class SafeHarborBrowser {
         document.getElementById('home-button').addEventListener('click', () => this.goHome());
         document.getElementById('go-button').addEventListener('click', () => this.navigate());
         
-        // URL input
+        // Smart URL input with suggestions
         const urlInput = document.getElementById('url-input');
         urlInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.navigate();
+        });
+        
+        urlInput.addEventListener('input', (e) => {
+            this.showSmartSuggestions(e.target.value);
+        });
+        
+        urlInput.addEventListener('focus', () => {
+            if (urlInput.value.length > 2) {
+                this.showSmartSuggestions(urlInput.value);
+            }
+        });
+        
+        urlInput.addEventListener('blur', () => {
+            // Hide suggestions after a delay to allow clicking
+            setTimeout(() => this.hideSuggestions(), 200);
         });
         
         // Webview events
@@ -143,11 +158,25 @@ class SafeHarborBrowser {
         const icon = indicator.querySelector('.safety-icon');
         const text = indicator.querySelector('.safety-text');
         
-        indicator.classList.remove('safe', 'warning', 'danger');
-        indicator.classList.add(safetyInfo.level);
+        // Add updating animation
+        indicator.classList.add('updating');
         
-        icon.textContent = safetyInfo.icon;
-        text.textContent = safetyInfo.message;
+        setTimeout(() => {
+            // Remove existing classes
+            indicator.classList.remove('safe', 'warning', 'danger', 'updating');
+            
+            // Add new class
+            indicator.classList.add(safetyInfo.level);
+            
+            // Update content with smooth transition
+            icon.textContent = safetyInfo.icon;
+            text.textContent = safetyInfo.message;
+            
+            // Show contextual overlay for warnings/dangers
+            if (safetyInfo.level !== 'safe') {
+                this.showContextualAlert(safetyInfo);
+            }
+        }, 500);
     }
 
     toggleFontSize() {
@@ -176,6 +205,124 @@ class SafeHarborBrowser {
         if (window.aiAssistant) {
             window.aiAssistant.showHelp();
         }
+    }
+
+    showSmartSuggestions(query) {
+        if (query.length < 2) {
+            this.hideSuggestions();
+            return;
+        }
+        
+        const suggestions = this.generateSuggestions(query);
+        const suggestionsContainer = document.getElementById('address-suggestions');
+        
+        if (suggestions.length === 0) {
+            this.hideSuggestions();
+            return;
+        }
+        
+        suggestionsContainer.innerHTML = suggestions.map(suggestion => `
+            <div class="suggestion-item" data-url="${suggestion.url}">
+                <div class="suggestion-icon ${suggestion.safety}">
+                    ${suggestion.icon}
+                </div>
+                <div class="suggestion-text">
+                    <div class="suggestion-title">${suggestion.title}</div>
+                    <div class="suggestion-description">${suggestion.description}</div>
+                </div>
+            </div>
+        `).join('');
+        
+        // Add click handlers
+        suggestionsContainer.querySelectorAll('.suggestion-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const url = item.getAttribute('data-url');
+                document.getElementById('url-input').value = url;
+                this.navigate();
+                this.hideSuggestions();
+            });
+        });
+        
+        suggestionsContainer.style.display = 'block';
+    }
+    
+    generateSuggestions(query) {
+        const lowerQuery = query.toLowerCase();
+        const suggestions = [];
+        
+        // Safe site suggestions
+        const safeSites = [
+            { domain: 'amazon.com', title: 'Amazon', description: 'Trusted online shopping' },
+            { domain: 'aarp.org', title: 'AARP', description: 'Resources for seniors' },
+            { domain: 'medicare.gov', title: 'Medicare', description: 'Official health information' },
+            { domain: 'ssa.gov', title: 'Social Security', description: 'Government services' },
+            { domain: 'apple.com', title: 'Apple', description: 'Technology and support' },
+            { domain: 'microsoft.com', title: 'Microsoft', description: 'Software and services' }
+        ];
+        
+        safeSites.forEach(site => {
+            if (site.domain.includes(lowerQuery) || site.title.toLowerCase().includes(lowerQuery)) {
+                suggestions.push({
+                    url: `https://www.${site.domain}`,
+                    title: site.title,
+                    description: site.description,
+                    icon: '🛡️',
+                    safety: 'suggestion-safe'
+                });
+            }
+        });
+        
+        // Add search suggestion if it doesn't look like a URL
+        if (!lowerQuery.includes('.') && suggestions.length < 3) {
+            suggestions.unshift({
+                url: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+                title: `Search for "${query}"`,
+                description: 'Safe Google search',
+                icon: '🔍',
+                safety: 'suggestion-safe'
+            });
+        }
+        
+        return suggestions.slice(0, 5);
+    }
+    
+    hideSuggestions() {
+        const suggestionsContainer = document.getElementById('address-suggestions');
+        suggestionsContainer.style.display = 'none';
+    }
+    
+    showContextualAlert(safetyInfo) {
+        const overlay = document.getElementById('ai-overlay');
+        const content = document.getElementById('ai-overlay-content');
+        
+        const alertContent = safetyInfo.level === 'warning' 
+            ? `<h3>⚠️ Proceed with Caution</h3>
+               <p>I don't have complete safety information about this site. Please be extra careful and avoid entering personal information.</p>
+               <div style="margin-top: 16px; display: flex; gap: 8px;">
+                   <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
+                           style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                       I'll be careful
+                   </button>
+                   <button onclick="window.browser.goBack(); this.closest('.ai-overlay').classList.remove('show')" 
+                           style="padding: 8px 16px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                       Go back
+                   </button>
+               </div>`
+            : `<h3>🚨 Security Warning</h3>
+               <p>This site may not be safe. I recommend leaving immediately to protect your personal information.</p>
+               <div style="margin-top: 16px; display: flex; gap: 8px;">
+                   <button onclick="window.browser.goBack(); this.closest('.ai-overlay').classList.remove('show')" 
+                           style="padding: 8px 16px; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                       Leave site
+                   </button>
+                   <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
+                           style="padding: 8px 16px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                       Ignore warning
+                   </button>
+               </div>`;
+        
+        content.innerHTML = alertContent;
+        overlay.classList.add('show');
     }
 
     loadMockSafetyData() {
