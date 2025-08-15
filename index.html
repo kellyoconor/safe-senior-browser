@@ -291,6 +291,53 @@
             flex-shrink: 0;
         }
         
+        /* Link Preview Tooltip */
+        .link-preview {
+            position: absolute;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #374151;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 250px;
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+        }
+        
+        .link-preview.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .link-preview.safe {
+            border-left: 3px solid #059669;
+        }
+        
+        .link-preview.warning {
+            border-left: 3px solid #ea580c;
+        }
+        
+        .link-preview.danger {
+            border-left: 3px solid #dc2626;
+        }
+        
+        .link-preview-domain {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .link-preview-status {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+        
         /* Seamless Webview */
         .webview-container {
             flex: 1;
@@ -958,6 +1005,10 @@
                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </symbol>
+            <symbol id="icon-eye" viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+            </symbol>
             
             <!-- Chevron Right -->
             <symbol id="icon-chevron-right" viewBox="0 0 24 24">
@@ -1020,6 +1071,11 @@
                         <use href="#icon-contrast"></use>
                     </svg>
                 </button>
+                <button class="control-button" id="link-preview-toggle" title="Toggle Link Previews">
+                    <svg class="icon icon-md">
+                        <use href="#icon-eye"></use>
+                    </svg>
+                </button>
             </div>
         </header>
         
@@ -1063,6 +1119,16 @@
                     </div>
                     
                     <div class="secondary-nav">
+                        <button class="nav-button" id="check-site-button" title="Check Site">
+                            <svg class="icon icon-sm">
+                                <use href="#icon-search"></use>
+                            </svg>
+                        </button>
+                        <button class="nav-button" id="safe-zone-button" title="Go to Safety">
+                            <svg class="icon icon-sm">
+                                <use href="#icon-shield"></use>
+                            </svg>
+                        </button>
                         <button class="nav-button" id="bookmarks-button" title="Bookmarks">
                             <svg class="icon icon-sm">
                                 <use href="#icon-star"></use>
@@ -1119,6 +1185,19 @@
             <div class="ai-overlay-content" id="ai-overlay-content">
                 <!-- Dynamic content will be inserted here -->
             </div>
+        </div>
+        
+        <!-- Form Protection Overlay -->
+        <div class="ai-overlay" id="form-protection-overlay">
+            <div class="ai-overlay-content" id="form-protection-content">
+                <!-- Form protection content inserted here -->
+            </div>
+        </div>
+        
+        <!-- Link Preview Tooltip -->
+        <div class="link-preview" id="link-preview-tooltip">
+            <div class="link-preview-domain"></div>
+            <div class="link-preview-status"></div>
         </div>
     </div>
     

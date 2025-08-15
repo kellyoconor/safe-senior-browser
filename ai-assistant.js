@@ -343,6 +343,93 @@ class SafeGuideAI {
         const sidebar = document.getElementById('ai-sidebar');
         sidebar.classList.remove('expanded');
     }
+
+    showSiteReport(url, safetyInfo) {
+        const domain = this.extractDomain(url);
+        
+        let reportContent = '';
+        if (safetyInfo.level === 'safe') {
+            reportContent = `<div style="text-align: center;">
+                <div style="margin-bottom: 16px;">
+                    <svg class="icon icon-2xl" style="color: #059669;">
+                        <use href="#icon-shield"></use>
+                    </svg>
+                </div>
+                <h3 style="font-size: 20px; margin-bottom: 12px; color: #059669;">✅ ${domain} is Safe</h3>
+                <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+                    Great news! This website has passed all our safety checks:
+                    <br><br>
+                    • Verified as a legitimate website<br>
+                    • Uses proper security encryption<br>
+                    • No known safety concerns<br>
+                    • Safe to enter personal information
+                </p>
+                <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
+                        style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #059669; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                    Continue browsing safely
+                </button>
+            </div>`;
+        } else if (safetyInfo.level === 'warning') {
+            reportContent = `<div style="text-align: center;">
+                <div style="margin-bottom: 16px;">
+                    <svg class="icon icon-2xl" style="color: #ea580c;">
+                        <use href="#icon-warning"></use>
+                    </svg>
+                </div>
+                <h3 style="font-size: 20px; margin-bottom: 12px; color: #ea580c;">⚠️ Be Cautious on ${domain}</h3>
+                <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+                    I don't have complete safety information about this website. To stay safe:
+                    <br><br>
+                    • Avoid entering passwords or personal information<br>
+                    • Don't download any files<br>
+                    • Leave if anything seems suspicious<br>
+                    • Consider using a more trusted alternative
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button onclick="window.browser.goToSafeZone(); this.closest('.ai-overlay').classList.remove('show')" 
+                            style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #059669; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                        Take me somewhere safe
+                    </button>
+                    <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
+                            style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #6b7280; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                        I'll be careful here
+                    </button>
+                </div>
+            </div>`;
+        } else {
+            reportContent = `<div style="text-align: center;">
+                <div style="margin-bottom: 16px;">
+                    <svg class="icon icon-2xl" style="color: #dc2626;">
+                        <use href="#icon-alert"></use>
+                    </svg>
+                </div>
+                <h3 style="font-size: 20px; margin-bottom: 12px; color: #dc2626;">🚨 ${domain} is Not Safe</h3>
+                <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+                    This website has failed our safety checks and may be dangerous:
+                    <br><br>
+                    • May steal your personal information<br>
+                    • Could install harmful software<br>
+                    • Might be a scam or fake website<br>
+                    • I strongly recommend leaving immediately
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button onclick="window.browser.goToSafeZone(); this.closest('.ai-overlay').classList.remove('show')" 
+                            style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #dc2626; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                        Yes, get me out of here
+                    </button>
+                    <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
+                            style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #6b7280; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                        I understand the risks
+                    </button>
+                </div>
+            </div>`;
+        }
+        
+        const overlay = document.getElementById('ai-overlay');
+        const content = document.getElementById('ai-overlay-content');
+        content.innerHTML = reportContent;
+        overlay.classList.add('show');
+    }
 }
 
 const aiAssistant = new SafeGuideAI();
