@@ -131,27 +131,33 @@
         
         /* Browser Panel - Clean Safari-like Chrome */
         .browser-panel { 
-            flex: 0 0 65%;
+            width: 65%;
             display: flex;
             flex-direction: column;
             background: #ffffff;
             overflow: hidden;
             min-width: 0;
+            transition: width 0.3s ease;
+        }
+        
+        /* Browser expands when AI is collapsed */
+        .main-content-area.ai-collapsed .browser-panel {
+            width: calc(100% - 60px);
         }
         
         /* AI Panel - Persistent Chat Interface */
         .ai-panel {
-            flex: 0 0 35%;
+            width: 35%;
             display: flex;
             flex-direction: column;
             background: #fafafa;
             border-left: 1px solid rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: flex-basis 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.3s ease;
         }
         
         .ai-panel.collapsed {
-            flex: 0 0 48px; /* Just enough for the header */
+            width: 60px;
         }
         
         .ai-header {
@@ -222,20 +228,31 @@
         }
         
         .ai-collapse-button {
-            background: none;
-            border: none;
+            background: #FF6B35 !important;
+            border: 3px solid #FFFFFF !important;
             cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
-            transition: background 0.2s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-left: 8px;
+            padding: 8px 12px !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease;
+            margin-left: 16px !important;
+            min-width: 50px !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
         }
         
         .ai-collapse-button:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: #FF8C00 !important;
+            border-color: #FFFFFF !important;
+            transform: scale(1.1) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
         }
         
-        .ai-panel.collapsed .ai-collapse-button svg {
+        .ai-panel.collapsed .ai-collapse-button span {
             transform: rotate(180deg);
         }
         
@@ -248,7 +265,25 @@
         }
         
         .ai-panel.collapsed .ai-header {
-            padding: 12px 20px;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .ai-panel.collapsed .ai-header > div {
+            display: none !important;
+        }
+        
+        .ai-panel.collapsed .ai-collapse-button {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            min-width: 44px !important;
+            height: 44px !important;
+            background: #FF6B35 !important;
+            border: 3px solid #FFFFFF !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
         
         /* Comet-Style Smart Address Bar */
@@ -1175,16 +1210,11 @@
             
             <div class="ai-panel">
                 <div class="ai-header">
-                    <svg class="icon icon-md" style="color: white;">
-                        <use href="#icon-shield"></use>
-                    </svg>
-                    <span>SafeGuide</span>
-                    <div style="flex: 1;"></div>
-                    <span style="font-size: 12px; opacity: 0.8;" class="ai-subtitle">Always watching out for you</span>
-                    <button class="ai-collapse-button" id="ai-collapse-button" title="Collapse SafeGuide">
-                        <svg class="icon icon-sm" style="color: white;">
-                            <use href="#icon-chevron-right"></use>
-                        </svg>
+                    <div style="display: flex; align-items: center; gap: 8px; flex: 1;">
+                        <!-- Clean header with just the button -->
+                    </div>
+                    <button class="ai-collapse-button" onclick="toggleAIPanel()" title="Collapse AI Assistant">
+                        <span id="collapse-arrow" style="color: white; font-size: 20px; font-weight: bold;">←</span>
                     </button>
                 </div>
                 
@@ -1237,5 +1267,22 @@
     
     <script src="./browser.js"></script>
     <script src="./ai-assistant.js"></script>
+    <script>
+        function toggleAIPanel() {
+            const aiPanel = document.querySelector('.ai-panel');
+            const mainContent = document.querySelector('.main-content-area');
+            const arrow = document.getElementById('collapse-arrow');
+            const button = document.querySelector('.ai-collapse-button');
+            
+            // Toggle collapsed state
+            aiPanel.classList.toggle('collapsed');
+            mainContent.classList.toggle('ai-collapsed');
+            
+            // Update arrow direction and tooltip
+            const isCollapsed = aiPanel.classList.contains('collapsed');
+            arrow.textContent = isCollapsed ? '→' : '←';
+            button.title = isCollapsed ? 'Expand AI Assistant' : 'Collapse AI Assistant';
+        }
+    </script>
 </body>
 </html>

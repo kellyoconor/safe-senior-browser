@@ -32,8 +32,15 @@ class SafeGuideAI {
 
         // Setup collapse button
         const collapseButton = document.getElementById('ai-collapse-button');
+        console.log('Found collapse button:', collapseButton); // Debug
         if (collapseButton) {
-            collapseButton.addEventListener('click', () => this.toggleCollapse());
+            console.log('Adding click listener to collapse button'); // Debug
+            collapseButton.addEventListener('click', () => {
+                console.log('Collapse button clicked!'); // Debug
+                this.toggleCollapse();
+            });
+        } else {
+            console.error('Collapse button not found!'); // Debug
         }
         
         this.setupRecommendedSites();
@@ -347,16 +354,27 @@ class SafeGuideAI {
         this.addMessage(helpMessage, 'assistant');
     }
 
-    // AI Panel Collapse/Expand
+    // AI Panel Collapse/Expand - Super Simple
     toggleCollapse() {
+        console.log('Toggle collapse clicked!'); // Debug
+        
         const aiPanel = document.querySelector('.ai-panel');
+        const mainContent = document.querySelector('.main-content-area');
         const collapseButton = document.getElementById('ai-collapse-button');
+        const arrow = collapseButton.querySelector('span');
         
+        console.log('Current arrow text:', arrow.textContent); // Debug
+        
+        // Toggle collapsed state
         aiPanel.classList.toggle('collapsed');
+        mainContent.classList.toggle('ai-collapsed');
         
-        // Update button title
+        // Update arrow direction and tooltip
         const isCollapsed = aiPanel.classList.contains('collapsed');
-        collapseButton.title = isCollapsed ? 'Expand SafeGuide' : 'Collapse SafeGuide';
+        arrow.textContent = isCollapsed ? '→' : '←';
+        collapseButton.title = isCollapsed ? 'Expand AI Assistant' : 'Collapse AI Assistant';
+        
+        console.log('AI Panel collapsed:', isCollapsed, 'New arrow:', arrow.textContent);
     }
 
     showSiteReport(url, safetyInfo) {
