@@ -22,7 +22,6 @@ class SafeHarborBrowser {
         document.getElementById('back-button').addEventListener('click', () => this.goBack());
         document.getElementById('forward-button').addEventListener('click', () => this.goForward());
         document.getElementById('home-button').addEventListener('click', () => this.goHome());
-        document.getElementById('go-button').addEventListener('click', () => this.navigate());
         
         // Smart URL input with suggestions
         const urlInput = document.getElementById('url-input');
@@ -98,11 +97,15 @@ class SafeHarborBrowser {
     }
 
     onStartLoading() {
-        document.getElementById('go-button').textContent = '...';
+        // Update URL input to show loading state
+        const urlInput = document.getElementById('url-input');
+        urlInput.style.opacity = '0.6';
     }
 
     onStopLoading() {
-        document.getElementById('go-button').textContent = 'Go';
+        // Reset URL input
+        const urlInput = document.getElementById('url-input');
+        urlInput.style.opacity = '1';
         this.updateNavigationButtons();
     }
 

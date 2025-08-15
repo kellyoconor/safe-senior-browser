@@ -285,6 +285,11 @@ class SafeGuideAI {
     }
 
     onUrlChange(url, safetyInfo) {
+        // Prevent duplicate messages for the same URL
+        if (this.currentUrl === url) {
+            return;
+        }
+        
         this.currentUrl = url;
         const domain = this.extractDomain(url);
         
