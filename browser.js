@@ -158,28 +158,28 @@ class SafeHarborBrowser {
             return { 
                 level: 'safe', 
                 message: 'Safe', 
-                ribbonMessage: `I'll keep watch while you browse • You're safely on ${domain}`,
+                ribbonMessage: `I'll keep watch while you browse - You're safely on ${domain}`,
                 iconId: 'icon-shield' 
             };
         } else if (this.safetyData.warning.some(w => domain.includes(w))) {
             return { 
                 level: 'warning', 
                 message: "Caution", 
-                ribbonMessage: "I don't have complete info on this site • Let's be extra cautious",
+                ribbonMessage: "I don't have complete info on this site - Let's be extra cautious",
                 iconId: 'icon-warning' 
             };
         } else if (this.safetyData.danger.some(d => domain.includes(d))) {
             return { 
                 level: 'danger', 
                 message: "Unsafe", 
-                ribbonMessage: "This site looks risky • I suggest we go somewhere safer",
+                ribbonMessage: "This site looks risky - I suggest we go somewhere safer",
                 iconId: 'icon-alert' 
             };
         } else {
             return { 
                 level: 'safe', 
                 message: 'Checking...', 
-                ribbonMessage: "I'm checking this site to make sure it's safe • Just a moment",
+                ribbonMessage: "I'm checking this site to make sure it's safe - Just a moment",
                 iconId: 'icon-search' 
             };
         }
@@ -348,9 +348,9 @@ class SafeHarborBrowser {
                    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
                        I don't have complete safety information about this website. To protect yourself:
                        <br><br>
-                       • Don't enter passwords or personal information<br>
-                       • Be cautious of any download requests<br>
-                       • Leave if anything seems suspicious
+                       &bull; Don't enter passwords or personal information<br>
+                       &bull; Be cautious of any download requests<br>
+                       &bull; Leave if anything seems suspicious
                    </p>
                    <div style="display: flex; gap: 12px; justify-content: center;">
                        <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
@@ -374,9 +374,9 @@ class SafeHarborBrowser {
                        For your protection, I strongly recommend leaving this site immediately. 
                        This website might try to:
                        <br><br>
-                       • Steal your personal information<br>
-                       • Install harmful software<br>
-                       • Trick you into sharing passwords
+                       &bull; Steal your personal information<br>
+                       &bull; Install harmful software<br>
+                       &bull; Trick you into sharing passwords
                    </p>
                    <div style="display: flex; gap: 12px; justify-content: center;">
                        <button onclick="window.browser.goBack(); this.closest('.ai-overlay').classList.remove('show')" 

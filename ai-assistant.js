@@ -24,20 +24,18 @@ class SafeGuideAI {
 
         this.sendButton.addEventListener('click', () => this.sendMessage());
         this.userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.sendMessage();
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage();
+            }
         });
 
-        // Setup AI trigger and close buttons
-        const aiTrigger = document.getElementById('ai-trigger');
-        const aiClose = document.getElementById('ai-close');
-        
-        if (aiTrigger) {
-            aiTrigger.addEventListener('click', () => this.showAI());
+        // Setup collapse button
+        const collapseButton = document.getElementById('ai-collapse-button');
+        if (collapseButton) {
+            collapseButton.addEventListener('click', () => this.toggleCollapse());
         }
         
-        if (aiClose) {
-            aiClose.addEventListener('click', () => this.hideAI());
-        }
         this.setupRecommendedSites();
         window.aiAssistant = this;
     }
@@ -297,11 +295,11 @@ class SafeGuideAI {
             let message = '';
             
             if (safetyInfo.level === 'safe') {
-                message = `✅ You've navigated to ${domain}. This is a trusted website. Browse safely!`;
+                message = `<div style="display: flex; align-items: center; gap: 8px;"><svg class="icon icon-sm" style="color: #059669;"><use href="#icon-shield"></use></svg><strong>You've navigated to ${domain}. This is a trusted website. Browse safely!</strong></div>`;
             } else if (safetyInfo.level === 'warning') {
-                message = `⚠️ You're on ${domain}. Please be cautious and avoid entering personal information.`;
+                message = `<div style="display: flex; align-items: center; gap: 8px;"><svg class="icon icon-sm" style="color: #ea580c;"><use href="#icon-warning"></use></svg><strong>You're on ${domain}. Please be cautious and avoid entering personal information.</strong></div>`;
             } else if (safetyInfo.level === 'danger') {
-                message = `🚨 WARNING: ${domain} may not be safe! Consider leaving this site.`;
+                message = `<div style="display: flex; align-items: center; gap: 8px;"><svg class="icon icon-sm" style="color: #dc2626;"><use href="#icon-alert"></use></svg><strong>WARNING: ${domain} may not be safe! Consider leaving this site.</strong></div>`;
             }
             
             if (message) {
@@ -319,29 +317,46 @@ class SafeGuideAI {
     }
 
     showHelp() {
-        const helpMessage = `🆘 <strong>SafeHarbor Browser Help</strong><br><br>
-        🛡️ Safety indicators: Green=Safe, Yellow=Caution, Red=Danger<br>
-        🔧 Use Back/Forward/Home buttons for navigation<br>
-        💬 Ask me about website safety anytime!<br>
-        �� I can help with passwords and security tips`;
+        const helpMessage = `<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;"><svg class="icon icon-md" style="color: #3b82f6;"><use href="#icon-help"></use></svg><strong>SafeHarbor Browser Help</strong></div>
+        
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                <use href="#icon-shield"></use>
+            </svg>
+            Safety indicators: Green=Safe, Yellow=Caution, Red=Danger
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                <use href="#icon-arrow-left"></use>
+            </svg>
+            Use Back/Forward/Home buttons for navigation
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <svg class="icon icon-sm" style="color: #3b82f6; margin-right: 8px;">
+                <use href="#icon-help"></use>
+            </svg>
+            Ask me about website safety anytime!
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                <use href="#icon-shield"></use>
+            </svg>
+            I can help with passwords and security tips
+        </div>`;
         
         this.addMessage(helpMessage, 'assistant');
     }
 
-    showAI() {
-        const sidebar = document.getElementById('ai-sidebar');
-        sidebar.classList.add('expanded');
+    // AI Panel Collapse/Expand
+    toggleCollapse() {
+        const aiPanel = document.querySelector('.ai-panel');
+        const collapseButton = document.getElementById('ai-collapse-button');
         
-        // Auto-focus on the input when opened
-        setTimeout(() => {
-            const input = document.getElementById('user-input');
-            if (input) input.focus();
-        }, 300);
-    }
-    
-    hideAI() {
-        const sidebar = document.getElementById('ai-sidebar');
-        sidebar.classList.remove('expanded');
+        aiPanel.classList.toggle('collapsed');
+        
+        // Update button title
+        const isCollapsed = aiPanel.classList.contains('collapsed');
+        collapseButton.title = isCollapsed ? 'Expand SafeGuide' : 'Collapse SafeGuide';
     }
 
     showSiteReport(url, safetyInfo) {
@@ -355,14 +370,34 @@ class SafeGuideAI {
                         <use href="#icon-shield"></use>
                     </svg>
                 </div>
-                <h3 style="font-size: 20px; margin-bottom: 12px; color: #059669;">✅ ${domain} is Safe</h3>
+                <h3 style="font-size: 20px; margin-bottom: 12px; color: #059669;">${domain} is Safe</h3>
                 <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
                     Great news! This website has passed all our safety checks:
                     <br><br>
-                    • Verified as a legitimate website<br>
-                    • Uses proper security encryption<br>
-                    • No known safety concerns<br>
-                    • Safe to enter personal information
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                            <use href="#icon-shield"></use>
+                        </svg>
+                        Verified as a legitimate website
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                            <use href="#icon-shield"></use>
+                        </svg>
+                        Uses proper security encryption
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                            <use href="#icon-shield"></use>
+                        </svg>
+                        No known safety concerns
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">
+                            <use href="#icon-shield"></use>
+                        </svg>
+                        Safe to enter personal information
+                    </div>
                 </p>
                 <button onclick="this.closest('.ai-overlay').classList.remove('show')" 
                         style="padding: 12px 24px; font-size: 16px; font-weight: 600; background: #059669; color: white; border: none; border-radius: 8px; cursor: pointer;">
@@ -376,14 +411,34 @@ class SafeGuideAI {
                         <use href="#icon-warning"></use>
                     </svg>
                 </div>
-                <h3 style="font-size: 20px; margin-bottom: 12px; color: #ea580c;">⚠️ Be Cautious on ${domain}</h3>
+                <h3 style="font-size: 20px; margin-bottom: 12px; color: #ea580c;">Be Cautious on ${domain}</h3>
                 <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
                     I don't have complete safety information about this website. To stay safe:
                     <br><br>
-                    • Avoid entering passwords or personal information<br>
-                    • Don't download any files<br>
-                    • Leave if anything seems suspicious<br>
-                    • Consider using a more trusted alternative
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                            <use href="#icon-warning"></use>
+                        </svg>
+                        Avoid entering passwords or personal information
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                            <use href="#icon-warning"></use>
+                        </svg>
+                        Don't download any files
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                            <use href="#icon-warning"></use>
+                        </svg>
+                        Leave if anything seems suspicious
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #ea580c; margin-right: 8px;">
+                            <use href="#icon-warning"></use>
+                        </svg>
+                        Consider using a more trusted alternative
+                    </div>
                 </p>
                 <div style="display: flex; gap: 12px; justify-content: center;">
                     <button onclick="window.browser.goToSafeZone(); this.closest('.ai-overlay').classList.remove('show')" 
@@ -403,14 +458,34 @@ class SafeGuideAI {
                         <use href="#icon-alert"></use>
                     </svg>
                 </div>
-                <h3 style="font-size: 20px; margin-bottom: 12px; color: #dc2626;">🚨 ${domain} is Not Safe</h3>
+                <h3 style="font-size: 20px; margin-bottom: 12px; color: #dc2626;">${domain} is Not Safe</h3>
                 <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
                     This website has failed our safety checks and may be dangerous:
                     <br><br>
-                    • May steal your personal information<br>
-                    • Could install harmful software<br>
-                    • Might be a scam or fake website<br>
-                    • I strongly recommend leaving immediately
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #dc2626; margin-right: 8px;">
+                            <use href="#icon-alert"></use>
+                        </svg>
+                        May steal your personal information
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #dc2626; margin-right: 8px;">
+                            <use href="#icon-alert"></use>
+                        </svg>
+                        Could install harmful software
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #dc2626; margin-right: 8px;">
+                            <use href="#icon-alert"></use>
+                        </svg>
+                        Might be a scam or fake website
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <svg class="icon icon-sm" style="color: #dc2626; margin-right: 8px;">
+                            <use href="#icon-alert"></use>
+                        </svg>
+                        I strongly recommend leaving immediately
+                    </div>
                 </p>
                 <div style="display: flex; gap: 12px; justify-content: center;">
                     <button onclick="window.browser.goToSafeZone(); this.closest('.ai-overlay').classList.remove('show')" 
