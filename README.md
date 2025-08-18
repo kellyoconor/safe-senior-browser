@@ -1,9 +1,8 @@
 # SafeBrowser Mini-Browser
 
 Web browser **prototype** designed specifically for adults aged 65+ with integrated AI safety assistance and comprehensive onboarding system.
-**⚠️ Prototype Notice**
-This is an early-stage prototype of a mini web browser designed for adults aged 65+. It demonstrates core concepts for senior-friendly browsing, integrated AI safety assistance, and a comprehensive onboarding system.
-Not production-ready — functionality, design, and safety features are illustrative only.
+- **⚠️ Prototype Notice**
+- This is an early-stage prototype of a mini web browser designed for adults aged 65+. It demonstrates core concepts for senior-friendly browsing, integrated AI safety assistance, and a comprehensive onboarding system. Not production-ready — functionality, design, and safety features are illustrative only.
 
 
 ## Features
