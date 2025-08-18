@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>SafeBrowser</title>
+    <link rel="stylesheet" href="./introjs.min.css">
     <style>
         /* Premium Icon System */
         .icon {
@@ -511,6 +512,214 @@
         .link-preview-status {
             font-size: 11px;
             opacity: 0.8;
+        }
+
+        /* Welcome Tour Custom Styling */
+        .introjs-tooltip {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(77, 144, 181, 0.2) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+            color: #2E2E2E !important;
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            font-size: 18px !important;
+            line-height: 1.5 !important;
+            max-width: 400px !important;
+            min-width: 350px !important;
+        }
+
+        .introjs-tooltip-header {
+            padding: 8px 24px !important;
+            display: none !important;
+        }
+
+        .introjs-tooltiptext {
+            padding: 16px 24px 20px !important;
+            color: #2E2E2E !important;
+            font-weight: 400 !important;
+        }
+
+        .introjs-buttons {
+            padding: 16px 24px 20px !important;
+            border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            gap: 12px !important;
+            flex-wrap: nowrap !important;
+        }
+
+        .introjs-button {
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: #2E2E2E !important;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+            border-radius: 8px !important;
+            padding: 12px 20px !important;
+            font-size: 16px !important;
+            font-weight: 500 !important;
+            margin-left: 8px !important;
+            cursor: pointer !important;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            font-family: inherit !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .introjs-button:hover {
+            background: rgba(255, 255, 255, 1) !important;
+            border-color: rgba(0, 0, 0, 0.18) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        .introjs-nextbutton, .introjs-donebutton, .introjs-prevbutton {
+            background: white !important;
+            color: #2E2E2E !important;
+            border: 2px solid #2E2E2E !important;
+            font-weight: 600 !important;
+            flex: 1 !important;
+            max-width: 200px !important;
+            padding: 12px 16px !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        /* Primary action buttons (Next/Done) */
+        .introjs-nextbutton, .introjs-donebutton {
+            background: #007AFF !important;
+            color: white !important;
+            border: 2px solid #007AFF !important;
+        }
+
+        .introjs-nextbutton:hover, .introjs-donebutton:hover {
+            background: #0056CC !important;
+            color: white !important;
+            border-color: #0056CC !important;
+            transform: translateY(-1px) !important;
+        }
+
+        /* Secondary action button (Back) */
+        .introjs-prevbutton:hover {
+            background: #f8f8f8 !important;
+            color: #1a1a1a !important;
+            border-color: #1a1a1a !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .introjs-skipbutton {
+            display: none !important;
+        }
+
+        .introjs-bullets {
+            display: none !important;
+        }
+
+        .introjs-tooltip-header {
+            text-align: left !important;
+        }
+
+        /* Custom Progress Indicator */
+        .tour-progress {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            padding: 16px 24px !important;
+            background: rgba(77, 144, 181, 0.05) !important;
+            border-radius: 12px 12px 0 0 !important;
+            margin: -1px -1px 0 -1px !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+            position: relative !important;
+        }
+
+        .tour-skip-button {
+            position: absolute !important;
+            top: 50% !important;
+            right: 24px !important;
+            transform: translateY(-50%) !important;
+            background: white !important;
+            color: #666 !important;
+            border: 1px solid #ddd !important;
+            border-radius: 6px !important;
+            padding: 8px 12px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            z-index: 10 !important;
+            font-family: inherit !important;
+        }
+
+        .tour-skip-button:hover {
+            background: #f8f8f8 !important;
+            color: #333 !important;
+            border-color: #bbb !important;
+            transform: translateY(-50%) scale(1.02) !important;
+        }
+
+        .tour-step-counter {
+            font-size: 14px !important;
+            color: #666 !important;
+            font-weight: 500 !important;
+        }
+
+        .tour-progress-bar {
+            flex: 1 !important;
+            height: 4px !important;
+            background: rgba(0, 0, 0, 0.1) !important;
+            border-radius: 2px !important;
+            margin: 0 16px 0 16px !important;
+            margin-right: 120px !important;
+            overflow: hidden !important;
+        }
+
+        .tour-progress-fill {
+            height: 100% !important;
+            background: #4D90B5 !important;
+            border-radius: 2px !important;
+            transition: width 0.3s ease !important;
+        }
+
+        .introjs-overlay {
+            background: rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .introjs-helperLayer {
+            border-radius: 8px !important;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6), 0 0 30px rgba(77, 144, 181, 0.3) !important;
+        }
+
+        /* Highlight the Take Tour button */
+        #take-tour-button {
+            background: linear-gradient(135deg, #007AFF 0%, #0056CC 100%) !important;
+            color: white !important;
+            border: 2px solid #007AFF !important;
+            box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2), 0 2px 8px rgba(0, 122, 255, 0.3) !important;
+            animation: tour-button-pulse 2s ease-in-out infinite !important;
+        }
+
+        #take-tour-button:hover {
+            background: linear-gradient(135deg, #0056CC 0%, #003d99 100%) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3), 0 4px 12px rgba(0, 122, 255, 0.4) !important;
+        }
+
+        #take-tour-button svg {
+            color: white !important;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2)) !important;
+        }
+
+        @keyframes tour-button-pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2), 0 2px 8px rgba(0, 122, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.3), 0 2px 8px rgba(0, 122, 255, 0.4);
+            }
         }
         
         /* Seamless Webview */
@@ -1145,7 +1354,7 @@
     </svg>
     <div class="app-container">
         <header class="header">
-            <div class="brand">
+            <div class="brand" data-intro="Welcome to SafeBrowser! I'm here to help you browse the internet safely and confidently. Let me show you around your new secure browser." data-step="1">
                 <div class="brand-shield">
                     <svg class="icon icon-lg">
                         <use href="#icon-shield"></use>
@@ -1154,7 +1363,12 @@
                 <h1>SafeBrowser</h1>
             </div>
             <div class="header-controls">
-                <button class="control-button" id="font-size-toggle" title="Adjust Text Size">
+                <button class="control-button" id="take-tour-button" title="Take a Tour of SafeBrowser">
+                    <svg class="icon icon-md">
+                        <use href="#icon-help"></use>
+                    </svg>
+                </button>
+                <button class="control-button" id="font-size-toggle" title="Adjust Text Size" data-intro="These helpful tools are just for you! Adjust text size for easier reading, toggle high contrast for better visibility, and turn on link previews to see where links go before clicking them." data-step="6">
                     <svg class="icon icon-md">
                         <use href="#icon-type"></use>
                     </svg>
@@ -1194,17 +1408,17 @@
                     </div>
 
                     <div class="unified-input-strip">
-                        <div class="safety-indicator safe" id="safety-indicator">
+                        <div class="safety-indicator safe" id="safety-indicator" data-intro="Watch for this safety indicator! It shows green when you're on a trusted website, yellow for caution, and red for danger. I'll always let you know if something doesn't look right." data-step="3">
                             <svg class="icon icon-sm safety-icon">
                                 <use href="#icon-shield"></use>
                             </svg>
                             <span class="safety-text">Safe</span>
                         </div>
                         
-                        <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely...">
+                        <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely..." data-intro="Type any website address here to visit it safely. I'll check every site before you go there and warn you about anything suspicious." data-step="4">
                     </div>
                     
-                    <div class="secondary-nav">
+                    <div class="secondary-nav" data-intro="These are your quick action buttons! 'Check Site' gives you a detailed safety report, and 'Safe Zone' instantly takes you to a trusted website if you ever feel unsure." data-step="5">
                         <button class="nav-button" id="check-site-button" title="Check Site">
                             <svg class="icon icon-sm">
                                 <use href="#icon-search"></use>
@@ -1235,7 +1449,7 @@
                 </div>
             </div>
             
-            <div class="ai-panel">
+            <div class="ai-panel" data-intro="This is SafeGuide, your personal AI assistant. I'm always here to answer questions, explain what's safe, and help you navigate the web with confidence." data-step="2">
                 <div class="ai-header">
                     <div class="ai-header-content">
                         <h3 class="ai-title">SafeGuide</h3>
@@ -1251,6 +1465,7 @@
                         <div class="chat-message assistant-message">
                             <p><strong>Hi there!</strong></p>
                             <p>I'm here to help keep you safe online. I'll automatically alert you about dangerous sites and help with any questions you have.</p>
+                            <p>Click the <strong>help icon</strong> in the top-right corner if you'd like a quick tour!</p>
                         </div>
                     </div>
                     
@@ -1293,6 +1508,7 @@
         </div>
     </div>
     
+    <script src="./intro.min.js"></script>
     <script src="./browser.js"></script>
     <script src="./ai-assistant.js"></script>
     <script>
@@ -1311,6 +1527,84 @@
             arrow.textContent = isCollapsed ? '→' : '←';
             button.title = isCollapsed ? 'Expand SafeGuide' : 'Collapse SafeGuide';
         }
+
+        // Welcome Tour functionality
+        function startWelcomeTour() {
+            const tour = introJs();
+            
+            tour.setOptions({
+                nextLabel: 'Next →',
+                prevLabel: '← Back',
+                doneLabel: 'Start Browsing Safely!',
+                skipLabel: 'Skip Tour',
+                showStepNumbers: false,
+                showBullets: false,
+                scrollToElement: true,
+                overlayOpacity: 0.8,
+                tooltipClass: 'safebrowser-tooltip',
+                highlightClass: 'safebrowser-highlight'
+            });
+
+            // Add progress indicator with proper step tracking
+            tour.onafterchange(function(targetElement) {
+                // Remove any existing progress bars first
+                const existingProgress = document.querySelectorAll('.tour-progress');
+                existingProgress.forEach(p => p.remove());
+                
+                const currentStep = this._currentStep + 1;
+                const totalSteps = this._introItems.length;
+                const progressPercent = (currentStep / totalSteps) * 100;
+                
+                setTimeout(() => {
+                    const tooltip = document.querySelector('.introjs-tooltip');
+                    if (tooltip && !tooltip.querySelector('.tour-progress')) {
+                        const progressDiv = document.createElement('div');
+                        progressDiv.className = 'tour-progress';
+                        progressDiv.innerHTML = `
+                            <span class="tour-step-counter">Step ${currentStep} of ${totalSteps}</span>
+                            <div class="tour-progress-bar">
+                                <div class="tour-progress-fill" style="width: ${progressPercent}%"></div>
+                            </div>
+                            <button class="tour-skip-button" onclick="introJs().exit()">Skip Tour</button>
+                        `;
+                        tooltip.insertBefore(progressDiv, tooltip.firstChild);
+                    }
+                }, 100);
+            });
+
+            tour.oncomplete(function() {
+                // Add welcome message to AI chat after tour completion
+                addWelcomeMessageToChat();
+            });
+
+            tour.onexit(function() {
+                // Add welcome message even if tour is skipped
+                addWelcomeMessageToChat();
+            });
+
+            tour.start();
+        }
+
+        function addWelcomeMessageToChat() {
+            const chatWindow = document.getElementById('chat-window');
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.className = 'chat-message assistant-message';
+            welcomeMessage.innerHTML = `
+                <p><strong>Tour completed!</strong></p>
+                <p>Great job! Now you know all the key features to browse safely. I'm always here if you need help or have questions about any website.</p>
+                <p>Happy browsing! 🛡️</p>
+            `;
+            chatWindow.appendChild(welcomeMessage);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        // Initialize tour button when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const takeTourButton = document.getElementById('take-tour-button');
+            if (takeTourButton) {
+                takeTourButton.addEventListener('click', startWelcomeTour);
+            }
+        });
     </script>
 </body>
 </html>
