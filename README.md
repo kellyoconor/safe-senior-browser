@@ -9,7 +9,8 @@ Premium web browser prototype designed specifically for adults aged 65+ with int
 - **Progress tracking** with step counter and animated progress bar
 - **Senior-friendly messaging** with warm, conversational tone
 - **Eye-catching tour button** with blue gradient and pulse animation
-- **Professional tooltips** with premium styling and transparency effects
+- **Professional tooltips** with Material Design effects and Inter typography
+- **Sophisticated highlighting** with color-coded safety indicators and accent bars
 
 ### 🛡️ AI Safety Assistant (SafeGuide)
 - **Persistent AI chat panel** (35% screen width, collapsible)
@@ -18,10 +19,11 @@ Premium web browser prototype designed specifically for adults aged 65+ with int
 - **Tour completion celebration** with welcome message
 
 ### 🌐 Secure Browsing
+- **Google.com homepage** - trusted, familiar starting point for seniors
 - **Visual safety indicators** (green/yellow/red) for all websites
 - **Quick action buttons**: "Check Site" and "Safe Zone" 
 - **Form protection system** with user confirmation flows
-- **Link preview tooltips** with safety information
+- **Link preview tooltips** with safety information and glassmorphism effects
 
 ### ♿ Accessibility Features
 - **Font size toggle** for easier reading
@@ -53,6 +55,8 @@ The onboarding tour guides users through:
 ## Browser Layout
 - **Browser Panel**: 65% of screen width for web browsing
 - **AI Panel**: 35% of screen width (collapsible to 60px)
-- **Premium Design**: Transparency effects, backdrop blur, modern styling
+- **Premium Design**: Material Design with glassmorphism, layered shadows, and backdrop filters
+- **Typography**: Inter font family for professional, accessible text rendering
+- **Build Management**: `.gitignore` excludes build artifacts from version control
 
 Built with Electron for desktop. Optimized for macOS with cross-platform compatibility.
