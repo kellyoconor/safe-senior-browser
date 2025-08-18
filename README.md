@@ -8,11 +8,9 @@ Web browser **prototype** designed specifically for adults aged 65+ with integra
 
 ### 🎯 Welcome Onboarding Tour
 - **Interactive 6-step guided walkthrough** covering all key safety features
-- **Progress tracking** with step counter and animated progress bar
+- **Progress tracking** with animated progress bar
 - **Senior-friendly messaging** with warm, conversational tone
 - **Eye-catching tour button** with blue gradient and pulse animation
-- **Professional tooltips** with Material Design effects and Inter typography
-- **Sophisticated highlighting** with color-coded safety indicators and accent bars
 
 ### 🛡️ AI Safety Assistant (SafeGuide)
 - **Persistent AI chat panel** (35% screen width, collapsible)
