@@ -2,6 +2,7 @@
   "name": "safebrowser-mini-browser",
   "version": "1.0.1",
   "description": "SafeBrowser - Secure browsing for seniors",
+  "author": "SafeHarbor Team",
   "main": "main.js",
   "homepage": "./",
   "scripts": {
@@ -11,6 +12,8 @@
     "build-mac": "electron-builder --mac",
     "build-win": "electron-builder --win",
     "build-linux": "electron-builder --linux",
+    "build-unsigned": "electron-builder --mac --publish never",
+    "package-demo": "npm run build-unsigned",
     "dist": "npm run build"
   },
   "build": {
@@ -35,9 +38,10 @@
     ],
     "mac": {
       "category": "public.app-category.productivity",
+      "identity": null,
       "target": [
         {
-          "target": "dmg",
+          "target": "dir",
           "arch": ["x64", "arm64"]
         }
       ]
