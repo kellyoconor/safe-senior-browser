@@ -82,7 +82,7 @@ class SafeBrowser {
         document.getElementById('help-button').addEventListener('click', () => this.showHelp());
         
         // Initial safety check
-        this.checkSafety('https://amazon.com');
+        this.checkSafety('https://google.com');
         
         // Setup form protection
         this.setupFormProtection();
@@ -116,7 +116,7 @@ class SafeBrowser {
     }
 
     goHome() {
-        const homeUrl = 'https://www.google.com';
+        const homeUrl = 'https://google.com';
         this.webview.src = homeUrl;
         document.getElementById('url-input').value = homeUrl;
         this.checkSafety(homeUrl);
