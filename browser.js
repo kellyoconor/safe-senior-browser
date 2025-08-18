@@ -3,6 +3,7 @@ class SafeBrowser {
     constructor() {
         this.webview = null;
         this.currentUrl = '';
+        this.lastCheckedUrl = ''; // Track last safety check to prevent duplicates
         this.safetyData = this.loadMockSafetyData();
         this.linkPreviewsEnabled = true; // Default on for safety
         this.init();
@@ -50,6 +51,19 @@ class SafeBrowser {
             this.webview.addEventListener('did-start-loading', () => this.onStartLoading());
             this.webview.addEventListener('did-stop-loading', () => this.onStopLoading());
             this.webview.addEventListener('did-navigate', (e) => this.onNavigate(e.url));
+            
+            // Listen for messages from webview (link previews, form protection)
+            this.webview.addEventListener('console-message', (e) => {
+                try {
+                    // Handle webview postMessage communications
+                    if (e.message.startsWith('WEBVIEW_MESSAGE:')) {
+                        const data = JSON.parse(e.message.replace('WEBVIEW_MESSAGE:', ''));
+                        this.handleWebviewMessage(data);
+                    }
+                } catch (error) {
+                    // Ignore non-JSON console messages
+                }
+            });
         }
 
         // Accessibility controls
@@ -72,6 +86,9 @@ class SafeBrowser {
         
         // Setup form protection
         this.setupFormProtection();
+        
+        // Setup link previews (enabled by default)
+        this.setupLinkPreviews();
     }
 
     navigate() {
@@ -136,6 +153,12 @@ class SafeBrowser {
     }
 
     checkSafety(url) {
+        // Prevent duplicate safety checks for the same URL
+        if (this.lastCheckedUrl === url) {
+            return;
+        }
+        this.lastCheckedUrl = url;
+        
         const domain = this.extractDomain(url);
         const safetyInfo = this.getSafetyInfo(domain);
         this.updateSafetyIndicator(safetyInfo);
@@ -443,6 +466,8 @@ class SafeBrowser {
             this.webview.addEventListener('dom-ready', () => {
                 this.injectLinkPreviewScript();
             });
+            // Also inject into current page if already loaded
+            this.injectLinkPreviewScript();
         }
     }
 
@@ -452,38 +477,48 @@ class SafeBrowser {
     }
 
     injectLinkPreviewScript() {
-        if (!this.linkPreviewsEnabled) return;
+        if (!this.linkPreviewsEnabled || !this.webview) return;
         
         // Inject script into webview to handle link hover events
         const script = `
-            let hoverTimeout;
-            let tooltip = null;
-            
-            document.addEventListener('mouseover', (e) => {
-                if (e.target.tagName === 'A' && e.target.href) {
-                    clearTimeout(hoverTimeout);
-                    hoverTimeout = setTimeout(() => {
-                        window.chrome.webview?.postMessage({
-                            type: 'link-hover',
-                            url: e.target.href,
-                            x: e.clientX,
-                            y: e.clientY
-                        });
-                    }, 500);
-                }
-            });
-            
-            document.addEventListener('mouseout', (e) => {
-                if (e.target.tagName === 'A') {
-                    clearTimeout(hoverTimeout);
-                    window.chrome.webview?.postMessage({
-                        type: 'link-unhover'
-                    });
-                }
-            });
+            try {
+                let hoverTimeout;
+                let tooltip = null;
+                
+                document.addEventListener('mouseover', (e) => {
+                    if (e.target.tagName === 'A' && e.target.href) {
+                        clearTimeout(hoverTimeout);
+                        hoverTimeout = setTimeout(() => {
+                            console.log('WEBVIEW_MESSAGE:' + JSON.stringify({
+                                type: 'link-hover',
+                                url: e.target.href,
+                                x: e.clientX,
+                                y: e.clientY
+                            }));
+                        }, 500);
+                    }
+                });
+                
+                document.addEventListener('mouseout', (e) => {
+                    if (e.target.tagName === 'A') {
+                        clearTimeout(hoverTimeout);
+                        console.log('WEBVIEW_MESSAGE:' + JSON.stringify({
+                            type: 'link-unhover'
+                        }));
+                    }
+                });
+            } catch (error) {
+                console.log('Link preview script error:', error);
+            }
         `;
         
-        this.webview.executeJavaScript(script);
+        try {
+            this.webview.executeJavaScript(script).catch(err => {
+                console.log('Failed to inject link preview script:', err);
+            });
+        } catch (error) {
+            console.log('Script injection error:', error);
+        }
     }
 
     // Form Protection
@@ -526,12 +561,12 @@ class SafeBrowser {
                 
                 if (isSensitive) {
                     formProtectionActive = true;
-                    window.chrome.webview?.postMessage({
+                    console.log('WEBVIEW_MESSAGE:' + JSON.stringify({
                         type: 'sensitive-field-focus',
                         fieldType: element.type || 'text',
                         fieldName: element.name || '',
                         placeholder: element.placeholder || ''
-                    });
+                    }));
                 }
             }
             
@@ -591,6 +626,64 @@ class SafeBrowser {
         content.innerHTML = protectionContent;
         overlay.classList.add('show');
     }
+
+    // Handle messages from webview
+    handleWebviewMessage(data) {
+        switch (data.type) {
+            case 'link-hover':
+                this.showLinkPreview(data.url, data.x, data.y);
+                break;
+            case 'link-unhover':
+                this.hideLinkPreview();
+                break;
+            case 'sensitive-field-focus':
+                this.showFormProtectionDialog(data);
+                break;
+        }
+    }
+
+    // Show link preview tooltip
+    showLinkPreview(url, x, y) {
+        const domain = this.extractDomain(url);
+        const safetyInfo = this.getSafetyInfo(domain);
+        
+        const tooltip = document.getElementById('link-preview-tooltip');
+        const domainElement = tooltip.querySelector('.link-preview-domain');
+        const statusElement = tooltip.querySelector('.link-preview-status');
+        
+        // Update tooltip content
+        domainElement.textContent = domain;
+        statusElement.textContent = safetyInfo.message;
+        
+        // Update tooltip styling based on safety level
+        tooltip.className = 'link-preview show ' + safetyInfo.level;
+        
+        // Position tooltip near mouse cursor but keep it visible
+        const rect = document.body.getBoundingClientRect();
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        let left = x + 10;
+        let top = y - 40;
+        
+        // Adjust if tooltip would go off screen
+        if (left + 250 > window.innerWidth) {
+            left = x - 260;
+        }
+        if (top < 0) {
+            top = y + 20;
+        }
+        
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+    }
+
+    // Hide link preview tooltip
+    hideLinkPreview() {
+        const tooltip = document.getElementById('link-preview-tooltip');
+        tooltip.classList.remove('show');
+    }
 }
 
 const browser = new SafeBrowser();
+window.browser = browser;
+browser.init();
