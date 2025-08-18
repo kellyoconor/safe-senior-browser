@@ -95,9 +95,9 @@ class SafeGuideAI {
                 messageDiv.style.animation = 'fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
             }, 800);
         } else {
-            messageDiv.innerHTML = `<p>${content}</p>`;
-            this.chatWindow.appendChild(messageDiv);
-            this.chatWindow.scrollTop = this.chatWindow.scrollHeight;
+        messageDiv.innerHTML = `<p>${content}</p>`;
+        this.chatWindow.appendChild(messageDiv);
+        this.chatWindow.scrollTop = this.chatWindow.scrollHeight;
         }
         
         this.conversationHistory.push({ sender, content, timestamp: Date.now() });
@@ -324,7 +324,7 @@ class SafeGuideAI {
     }
 
     showHelp() {
-        const helpMessage = `<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;"><svg class="icon icon-md" style="color: #3b82f6;"><use href="#icon-help"></use></svg><strong>SafeHarbor Browser Help</strong></div>
+        const helpMessage = `<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;"><svg class="icon icon-md" style="color: #3b82f6;"><use href="#icon-help"></use></svg><strong>SafeBrowser Help</strong></div>
         
         <div style="display: flex; align-items: center; margin-bottom: 8px;">
             <svg class="icon icon-sm" style="color: #059669; margin-right: 8px;">

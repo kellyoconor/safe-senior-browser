@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SafeHarbor Browser</title>
+    <title>SafeBrowser</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; font-size: 18px; }
         .header { background: #f0f0f0; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>🛡️ SafeHarbor Browser</h1>
+        <h1>🛡️ SafeBrowser</h1>
         <div>
             <button class="nav-btn" onclick="goBack()">← Back</button>
             <button class="nav-btn" onclick="goForward()">→ Forward</button>
@@ -85,7 +85,7 @@
         function goForward() { if (webview.canGoForward()) webview.goForward(); }
         function goHome() { urlbar.value = "https://amazon.com"; navigate(); }
         function showHelp() { 
-            alert("SafeHarbor Browser Help:
+            alert("SafeBrowser Help:
 
 🛡️ Green = Safe website
 ⚠️ Yellow = Be careful

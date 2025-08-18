@@ -11,7 +11,7 @@ function createWindow() {
       contextIsolation: false,
       webviewTag: true
     },
-    title: "SafeHarbor Browser"
+    title: "SafeBrowser"
   });
   
   win.loadFile("index.html");

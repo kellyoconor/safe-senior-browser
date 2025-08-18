@@ -161,15 +161,18 @@
         }
         
         .ai-header {
-            background: linear-gradient(135deg, #4D90B5 0%, #3a7299 100%);
-            color: white;
-            padding: 16px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #1a1a1a;
+            padding: 20px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             font-size: 16px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
         
         .ai-content {
@@ -228,7 +231,7 @@
         }
         
         .ai-collapse-button {
-            background: #FF6B35 !important;
+            background: #7B2D8E !important;
             border: 3px solid #FFFFFF !important;
             cursor: pointer;
             padding: 8px 12px !important;
@@ -240,16 +243,16 @@
             display: flex !important;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+            box-shadow: 0 2px 8px rgba(123, 45, 142, 0.4) !important;
             font-size: 18px !important;
             font-weight: bold !important;
         }
         
         .ai-collapse-button:hover {
-            background: #FF8C00 !important;
+            background: #9A3FB0 !important;
             border-color: #FFFFFF !important;
             transform: scale(1.1) !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+            box-shadow: 0 4px 12px rgba(123, 45, 142, 0.5) !important;
         }
         
         /* Arrow direction handled by JavaScript, no transform needed */
@@ -268,8 +271,34 @@
             align-items: center;
         }
         
-        .ai-panel.collapsed .ai-header > div {
+        .ai-panel.collapsed .ai-header-content {
             display: none !important;
+        }
+        
+        .ai-header-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .ai-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 4px 0;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ai-subtitle {
+            font-size: 13px;
+            color: #4a5568;
+            margin: 0;
+            line-height: 1.3;
+            font-weight: 500;
+            letter-spacing: -0.01em;
         }
         
         .ai-panel.collapsed .ai-collapse-button {
@@ -277,7 +306,7 @@
             margin-right: 0 !important;
             min-width: 44px !important;
             height: 44px !important;
-            background: #FF6B35 !important;
+            background: #7B2D8E !important;
             border: 3px solid #FFFFFF !important;
             display: flex !important;
             align-items: center !important;
@@ -1208,10 +1237,11 @@
             
             <div class="ai-panel">
                 <div class="ai-header">
-                    <div style="display: flex; align-items: center; gap: 8px; flex: 1;">
-                        <!-- Clean header with just the button -->
+                    <div class="ai-header-content">
+                        <h3 class="ai-title">SafeGuide</h3>
+                        <p class="ai-subtitle">Your online safety companion</p>
                     </div>
-                    <button class="ai-collapse-button" onclick="toggleAIPanel()" title="Collapse AI Assistant">
+                    <button class="ai-collapse-button" onclick="toggleAIPanel()" title="Collapse SafeGuide">
                         <span id="collapse-arrow" style="color: white; font-size: 20px; font-weight: bold;">←</span>
                     </button>
                 </div>
@@ -1279,7 +1309,7 @@
             // Update arrow direction and tooltip
             const isCollapsed = aiPanel.classList.contains('collapsed');
             arrow.textContent = isCollapsed ? '→' : '←';
-            button.title = isCollapsed ? 'Expand AI Assistant' : 'Collapse AI Assistant';
+            button.title = isCollapsed ? 'Expand SafeGuide' : 'Collapse SafeGuide';
         }
     </script>
 </body>
