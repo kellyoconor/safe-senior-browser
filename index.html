@@ -580,37 +580,53 @@
         .introjs-nextbutton, .introjs-donebutton, .introjs-prevbutton {
             background: white !important;
             color: #2E2E2E !important;
-            border: 2px solid #2E2E2E !important;
-            font-weight: 600 !important;
+            border: 3px solid #2E2E2E !important;
+            font-weight: 700 !important;
+            font-size: 18px !important;
             flex: 1 !important;
-            max-width: 200px !important;
-            padding: 12px 16px !important;
+            max-width: 220px !important;
+            min-height: 56px !important;
+            padding: 16px 24px !important;
             text-align: center !important;
             white-space: nowrap !important;
             overflow: hidden !important;
             text-overflow: ellipsis !important;
+            border-radius: 12px !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
         }
 
         /* Primary action buttons (Next/Done) */
         .introjs-nextbutton, .introjs-donebutton {
-            background: #007AFF !important;
+            background: #059669 !important;
             color: white !important;
-            border: 2px solid #007AFF !important;
+            border: 3px solid #059669 !important;
+            font-size: 20px !important;
+            font-weight: 800 !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
         }
 
         .introjs-nextbutton:hover, .introjs-donebutton:hover {
-            background: #0056CC !important;
+            background: #047857 !important;
             color: white !important;
-            border-color: #0056CC !important;
-            transform: translateY(-1px) !important;
+            border-color: #047857 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3) !important;
         }
 
         /* Secondary action button (Back) */
+        .introjs-prevbutton {
+            background: #f8fafc !important;
+            color: #374151 !important;
+            border: 3px solid #d1d5db !important;
+            font-size: 17px !important;
+        }
+
         .introjs-prevbutton:hover {
-            background: #f8f8f8 !important;
-            color: #1a1a1a !important;
-            border-color: #1a1a1a !important;
-            transform: translateY(-1px) !important;
+            background: #e5e7eb !important;
+            color: #1f2937 !important;
+            border-color: #9ca3af !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
         }
 
         .introjs-skipbutton {
@@ -1356,7 +1372,7 @@
     </svg>
     <div class="app-container">
         <header class="header">
-            <div class="brand" data-intro="Welcome to SafeBrowser! I'm here to help you browse the internet safely and confidently. Let me show you around your new secure browser." data-step="1">
+            <div class="brand" data-intro="Welcome to SafeBrowser! You now have a browser designed specifically to protect you from online scams, phishing, and confusing websites. Let me show you the powerful safety features that will keep you secure every time you browse." data-step="1">
                 <div class="brand-shield">
                     <svg class="icon icon-lg">
                         <use href="#icon-shield"></use>
@@ -1370,7 +1386,7 @@
                         <use href="#icon-help"></use>
                     </svg>
                 </button>
-                <button class="control-button" id="font-size-toggle" title="Adjust Text Size" data-intro="These helpful tools are just for you! Adjust text size for easier reading, toggle high contrast for better visibility, and turn on link previews to see where links go before clicking them." data-step="6">
+                <button class="control-button" id="font-size-toggle" title="Adjust Text Size" data-intro="These comfort tools make browsing easier! Make text larger, increase contrast for better visibility, and enable link previews to see where links go BEFORE clicking them. Plus, hover over any link to see if it's safe!" data-step="6">
                     <svg class="icon icon-md">
                         <use href="#icon-type"></use>
                     </svg>
@@ -1410,17 +1426,17 @@
                     </div>
 
                     <div class="unified-input-strip">
-                        <div class="safety-indicator safe" id="safety-indicator" data-intro="Watch for this safety indicator! It shows green when you're on a trusted website, yellow for caution, and red for danger. I'll always let you know if something doesn't look right." data-step="3">
+                        <div class="safety-indicator safe" id="safety-indicator" data-intro="This is your Safety Shield! It automatically checks every website you visit. Green means safe and trusted, yellow means be careful, and red means potential danger. You'll never have to guess if a website is safe again!" data-step="3">
                             <svg class="icon icon-sm safety-icon">
                                 <use href="#icon-shield"></use>
                             </svg>
                             <span class="safety-text">Safe</span>
                         </div>
                         
-                        <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely..." data-intro="Type any website address here to visit it safely. I'll check every site before you go there and warn you about anything suspicious." data-step="4">
+                        <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely..." data-intro="Just type any website address here like you normally would. SafeBrowser automatically protects you from phishing sites, fake shopping pages, and Medicare scams. Browse with complete confidence!" data-step="4">
                     </div>
                     
-                    <div class="secondary-nav" data-intro="These are your quick action buttons! 'Check Site' gives you a detailed safety report, and 'Safe Zone' instantly takes you to a trusted website if you ever feel unsure." data-step="5">
+                    <div class="secondary-nav" data-intro="Your safety toolkit is right here! 'Check Site' gives you detailed safety reports about any website. 'Safe Zone' instantly takes you to trusted sites like Amazon when you feel uncertain. Think of these as your panic buttons for online safety!" data-step="5">
                         <button class="nav-button" id="check-site-button" title="Check Site">
                             <svg class="icon icon-sm">
                                 <use href="#icon-search"></use>
@@ -1447,11 +1463,11 @@
                 </div>
                 
                 <div class="webview-container">
-                    <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js"></webview>
+                    <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js" data-intro="This is where the magic happens! When you browse any website here, SafeBrowser is working behind the scenes. Try hovering over any link to see our Link Preview feature - it shows you where links go and whether they're safe BEFORE you click!" data-step="7"></webview>
                 </div>
             </div>
             
-            <div class="ai-panel" data-intro="This is SafeGuide, your personal AI assistant. I'm always here to answer questions, explain what's safe, and help you navigate the web with confidence." data-step="2">
+            <div class="ai-panel" data-intro="Meet SafeGuide, your personal AI safety assistant! I watch out for scams, explain confusing websites in simple terms, and give you confidence to browse safely. Ask me anything about online safety - I'm always here to help!" data-step="2">
                 <div class="ai-header">
                     <div class="ai-header-content">
                         <h3 class="ai-title">SafeGuide</h3>
@@ -1592,9 +1608,17 @@
             const welcomeMessage = document.createElement('div');
             welcomeMessage.className = 'chat-message assistant-message';
             welcomeMessage.innerHTML = `
-                <p><strong>Tour completed!</strong></p>
-                <p>Great job! Now you know all the key features to browse safely. I'm always here if you need help or have questions about any website.</p>
-                <p>Happy browsing! 🛡️</p>
+                <p><strong>🎉 Welcome to your safer internet!</strong></p>
+                <p>You're now protected from online scams, phishing attacks, and confusing websites. SafeBrowser is actively watching out for you on every site you visit.</p>
+                <p><strong>Key protections you now have:</strong></p>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>🛡️ <strong>Automatic scam detection</strong> - We catch fake Medicare, banking, and shopping sites</li>
+                    <li>🔗 <strong>Link preview tooltips</strong> - Hover over any link to see where it really goes</li>
+                    <li>🔒 <strong>Form protection</strong> - Warnings before entering personal information</li>
+                    <li>🤖 <strong>AI safety guidance</strong> - I explain confusing websites in simple terms</li>
+                </ul>
+                <p>Feel free to ask me about any website or if you're ever unsure about something online. I'm here to keep you safe and confident!</p>
+                <p><strong>Happy safe browsing! 🌟</strong></p>
             `;
             chatWindow.appendChild(welcomeMessage);
             chatWindow.scrollTop = chatWindow.scrollHeight;
