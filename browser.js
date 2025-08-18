@@ -477,38 +477,48 @@ class SafeBrowser {
     }
 
     injectLinkPreviewScript() {
-        if (!this.linkPreviewsEnabled) return;
+        if (!this.linkPreviewsEnabled || !this.webview) return;
         
         // Inject script into webview to handle link hover events
         const script = `
-            let hoverTimeout;
-            let tooltip = null;
-            
-            document.addEventListener('mouseover', (e) => {
-                if (e.target.tagName === 'A' && e.target.href) {
-                    clearTimeout(hoverTimeout);
-                    hoverTimeout = setTimeout(() => {
+            try {
+                let hoverTimeout;
+                let tooltip = null;
+                
+                document.addEventListener('mouseover', (e) => {
+                    if (e.target.tagName === 'A' && e.target.href) {
+                        clearTimeout(hoverTimeout);
+                        hoverTimeout = setTimeout(() => {
+                            console.log('WEBVIEW_MESSAGE:' + JSON.stringify({
+                                type: 'link-hover',
+                                url: e.target.href,
+                                x: e.clientX,
+                                y: e.clientY
+                            }));
+                        }, 500);
+                    }
+                });
+                
+                document.addEventListener('mouseout', (e) => {
+                    if (e.target.tagName === 'A') {
+                        clearTimeout(hoverTimeout);
                         console.log('WEBVIEW_MESSAGE:' + JSON.stringify({
-                            type: 'link-hover',
-                            url: e.target.href,
-                            x: e.clientX,
-                            y: e.clientY
+                            type: 'link-unhover'
                         }));
-                    }, 500);
-                }
-            });
-            
-            document.addEventListener('mouseout', (e) => {
-                if (e.target.tagName === 'A') {
-                    clearTimeout(hoverTimeout);
-                    console.log('WEBVIEW_MESSAGE:' + JSON.stringify({
-                        type: 'link-unhover'
-                    }));
-                }
-            });
+                    }
+                });
+            } catch (error) {
+                console.log('Link preview script error:', error);
+            }
         `;
         
-        this.webview.executeJavaScript(script);
+        try {
+            this.webview.executeJavaScript(script).catch(err => {
+                console.log('Failed to inject link preview script:', err);
+            });
+        } catch (error) {
+            console.log('Script injection error:', error);
+        }
     }
 
     // Form Protection
