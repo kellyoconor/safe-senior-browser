@@ -1,4 +1,4 @@
-# SafeHarbor Mini-Browser
+# SafeBrowser Mini-Browser
 
 Secure browser prototype for seniors with AI safety assistance.
 
