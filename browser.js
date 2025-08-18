@@ -1,5 +1,5 @@
-// SafeHarbor Browser Logic
-class SafeHarborBrowser {
+// SafeBrowser Logic
+class SafeBrowser {
     constructor() {
         this.webview = null;
         this.currentUrl = '';
@@ -593,4 +593,4 @@ class SafeHarborBrowser {
     }
 }
 
-const browser = new SafeHarborBrowser();
+const browser = new SafeBrowser();
