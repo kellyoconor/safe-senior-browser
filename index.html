@@ -1381,7 +1381,7 @@
                 <h1>SafeBrowser</h1>
             </div>
             <div class="header-controls">
-                <button class="control-button" id="take-tour-button" title="Take a Tour of SafeBrowser">
+                <button class="control-button" id="take-tour-button" title="Take a Tour of SafeBrowser" onclick="if(typeof startWelcomeTour === 'function') startWelcomeTour(); else alert('Please wait for page to fully load and try again.');">
                     <svg class="icon icon-md">
                         <use href="#icon-help"></use>
                     </svg>
@@ -1473,7 +1473,7 @@
                         <h3 class="ai-title">SafeGuide</h3>
                         <p class="ai-subtitle">Your online safety companion</p>
                     </div>
-                    <button class="ai-collapse-button" onclick="toggleAIPanel()" title="Collapse SafeGuide">
+                    <button class="ai-collapse-button" id="ai-collapse-button" title="Collapse SafeGuide">
                         <span id="collapse-arrow" style="color: white; font-size: 20px; font-weight: bold;">←</span>
                     </button>
                 </div>
@@ -1526,28 +1526,20 @@
         </div>
     </div>
     
-    <script src="./intro.min.js"></script>
     <script src="./browser.js"></script>
     <script src="./ai-assistant.js"></script>
+    <script src="./intro.min.js"></script>
     <script>
-        function toggleAIPanel() {
-            const aiPanel = document.querySelector('.ai-panel');
-            const mainContent = document.querySelector('.main-content-area');
-            const arrow = document.getElementById('collapse-arrow');
-            const button = document.querySelector('.ai-collapse-button');
-            
-            // Toggle collapsed state
-            aiPanel.classList.toggle('collapsed');
-            mainContent.classList.toggle('ai-collapsed');
-            
-            // Update arrow direction and tooltip
-            const isCollapsed = aiPanel.classList.contains('collapsed');
-            arrow.textContent = isCollapsed ? '→' : '←';
-            button.title = isCollapsed ? 'Expand SafeGuide' : 'Collapse SafeGuide';
-        }
+
 
         // Welcome Tour functionality
         function startWelcomeTour() {
+            // Simple check and fallback
+            if (typeof introJs === 'undefined') {
+                alert('Welcome Tour: Please refresh the page and try again.');
+                return;
+            }
+            
             const tour = introJs();
             
             tour.setOptions({
@@ -1624,13 +1616,28 @@
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        // Initialize tour button when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            const takeTourButton = document.getElementById('take-tour-button');
-            if (takeTourButton) {
-                takeTourButton.addEventListener('click', startWelcomeTour);
-            }
-
+        // Initialize tour button when page loads - Multiple approaches for reliability
+        window.addEventListener('load', function() {
+            setupTourButton();
         });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            setupTourButton();
+        });
+        
+        // Also try after a short delay
+        setTimeout(setupTourButton, 1000);
+        
+        function setupTourButton() {
+            const takeTourButton = document.getElementById('take-tour-button');
+            if (takeTourButton && !takeTourButton.hasAttribute('data-tour-setup')) {
+                takeTourButton.setAttribute('data-tour-setup', 'true');
+                takeTourButton.onclick = function(e) {
+                    e.preventDefault();
+                    startWelcomeTour();
+                    return false;
+                };
+            }
+        }
 </body>
 </html>
