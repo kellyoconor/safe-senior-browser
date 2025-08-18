@@ -50,19 +50,27 @@
             letter-spacing: normal;
         }
         
-        /* Senior-Friendly Header */
+        /* Senior-Friendly Header with Lavender to Light Blue Gradient */
         .header { 
-            background: rgba(255, 255, 255, 0.85); /* Crisp white with subtle transparency */
-            backdrop-filter: blur(40px); /* Stronger blur for premium feel */
-            -webkit-backdrop-filter: blur(40px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, 
+                rgba(230, 230, 250, 0.85) 0%,     /* Lavender */
+                rgba(248, 250, 255, 0.9) 30%,     /* Light lavender-white */
+                rgba(240, 248, 255, 0.85) 70%,    /* Light lavender-blue */
+                rgba(173, 216, 230, 0.8) 100%     /* Light blue */
+            );
+            backdrop-filter: blur(40px) saturate(150%); /* Enhanced blur with saturation */
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
+            border-bottom: 1px solid rgba(173, 216, 230, 0.2);
             padding: 12px 16px; /* More breathing room */
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: relative;
             z-index: 1000;
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+            box-shadow: 
+                0 1px 3px rgba(138, 43, 226, 0.08),
+                0 2px 8px rgba(173, 216, 230, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
             min-height: 56px; /* Ensure minimum height */
         }
         
@@ -160,23 +168,30 @@
             width: calc(100% - 60px);
         }
         
-        /* AI Panel - Persistent Chat Interface */
+        /* AI Panel - Persistent Chat Interface with Lavender to Light Blue Gradient */
         .ai-panel {
             width: 35%;
             display: flex;
             flex-direction: column;
-            background: rgba(250, 250, 250, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, 
+                rgba(230, 230, 250, 0.75) 0%,     /* Lavender */
+                rgba(240, 248, 255, 0.8) 50%,     /* Light lavender-blue */
+                rgba(173, 216, 230, 0.75) 100%    /* Light blue */
+            );
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border-left: 1px solid rgba(255, 255, 255, 0.4);
             overflow: hidden;
             transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 
-                inset 1px 0 0 rgba(255, 255, 255, 0.4),
-                -2px 0 16px rgba(0, 0, 0, 0.04);
+                inset 1px 0 0 rgba(255, 255, 255, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                -4px 0 24px rgba(138, 43, 226, 0.08),
+                -2px 0 16px rgba(135, 206, 235, 0.06);
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+                radial-gradient(circle at 20% 20%, rgba(147, 112, 219, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(173, 216, 230, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
         }
         
         .ai-panel.collapsed {
@@ -184,18 +199,20 @@
         }
         
         .ai-header {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.85) 0%, 
+                rgba(248, 250, 252, 0.9) 50%,
+                rgba(240, 248, 255, 0.85) 100%
+            );
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
             box-shadow: 
-                0 1px 3px rgba(0, 0, 0, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+                0 1px 3px rgba(138, 43, 226, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                inset 0 -1px 0 rgba(173, 216, 230, 0.2);
             color: #1a1a1a;
             padding: 20px 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(173, 216, 230, 0.15);
             font-size: 16px;
             font-weight: 600;
             display: flex;
@@ -797,12 +814,12 @@
         }
 
         .introjs-buttons {
-            padding: 16px 24px 20px !important;
+            padding: 12px 20px 16px !important;
             border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
             display: flex !important;
-            justify-content: space-between !important;
+            justify-content: flex-end !important;
             align-items: center !important;
-            gap: 12px !important;
+            gap: 8px !important;
             flex-wrap: nowrap !important;
         }
 
@@ -838,10 +855,12 @@
             font-size: 14px !important;
             letter-spacing: -0.1px !important;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-            flex: 1 !important;
-            max-width: 110px !important;
-            min-height: 36px !important;
-            padding: 8px 16px !important;
+            flex: 0 0 auto !important;
+            width: auto !important;
+            min-width: 70px !important;
+            max-width: 90px !important;
+            min-height: 32px !important;
+            padding: 6px 12px !important;
             text-align: center !important;
             white-space: nowrap !important;
             overflow: hidden !important;
@@ -888,6 +907,7 @@
                 0 1px 3px rgba(0, 0, 0, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            margin-right: auto !important;
         }
 
         .introjs-prevbutton:hover {
@@ -1887,20 +1907,119 @@
             const welcomeMessage = document.createElement('div');
             welcomeMessage.className = 'chat-message assistant-message';
             welcomeMessage.innerHTML = `
-                <p><strong>🎉 Welcome to your safer internet!</strong></p>
+                <p><strong>Welcome to your safer internet!</strong></p>
                 <p>You're now protected from online scams, phishing attacks, and confusing websites. SafeBrowser is actively watching out for you on every site you visit.</p>
                 <p><strong>Key protections you now have:</strong></p>
                 <ul style="margin: 10px 0; padding-left: 20px;">
-                    <li>🛡️ <strong>Automatic scam detection</strong> - We catch fake Medicare, banking, and shopping sites</li>
-                    <li>🔗 <strong>Link preview tooltips</strong> - Hover over any link to see where it really goes</li>
-                    <li>🔒 <strong>Form protection</strong> - Warnings before entering personal information</li>
-                    <li>🤖 <strong>AI safety guidance</strong> - I explain confusing websites in simple terms</li>
+                    <li><strong>Automatic scam detection</strong> - We catch fake Medicare, banking, and shopping sites</li>
+                    <li><strong>Link preview tooltips</strong> - Hover over any link to see where it really goes</li>
+                    <li><strong>Form protection</strong> - Warnings before entering personal information</li>
+                    <li><strong>AI safety guidance</strong> - I explain confusing websites in simple terms</li>
                 </ul>
                 <p>Feel free to ask me about any website or if you're ever unsure about something online. I'm here to keep you safe and confident!</p>
-                <p><strong>Happy safe browsing! 🌟</strong></p>
+                
+                <div style="margin: 16px 0; padding: 16px; background: rgba(255, 255, 255, 0.6); border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08);">
+                    <p style="margin: 0 0 12px 0; font-weight: 600; color: #374151;">Need additional help?</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button onclick="initiateCall()" style="flex: 1; min-width: 100px; padding: 8px 12px; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            Call Support
+                        </button>
+                        <button onclick="startLiveChat()" style="flex: 1; min-width: 100px; padding: 8px 12px; background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            Live Chat
+                        </button>
+                        <button onclick="requestScreenShare()" style="flex: 1; min-width: 100px; padding: 8px 12px; background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                            Screen Share
+                        </button>
+                    </div>
+                </div>
+                
+                <p><strong>Happy safe browsing!</strong></p>
             `;
             chatWindow.appendChild(welcomeMessage);
             chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        // Help action functions
+        function initiateCall() {
+            // Show a friendly message about calling support
+            const chatWindow = document.getElementById('chat-window');
+            const helpMessage = document.createElement('div');
+            helpMessage.className = 'chat-message assistant-message';
+            helpMessage.innerHTML = `
+                <p><strong><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom; margin-right: 8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Calling Support</strong></p>
+                <p>I'm connecting you with our friendly support team. They're specially trained to help seniors navigate online safely.</p>
+                <div style="margin: 12px 0; padding: 12px; background: rgba(5, 150, 105, 0.1); border-radius: 8px; border-left: 4px solid #059669;">
+                    <p style="margin: 0; font-weight: 600;">Support Number: 1-800-SAFE-WEB</p>
+                    <p style="margin: 4px 0 0 0; font-size: 14px; color: #6B7280;">Available 24/7 • No wait times • Free consultation</p>
+                </div>
+                <p style="font-size: 14px;">Your call will be automatically connected. A support specialist will be with you shortly to provide personalized assistance.</p>
+            `;
+            chatWindow.appendChild(helpMessage);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+            
+            // In a real implementation, this would initiate an actual call
+            // For demo purposes, we show the message above
+            setTimeout(() => {
+                window.open('tel:+18007233932', '_self');
+            }, 2000);
+        }
+
+        function startLiveChat() {
+            const chatWindow = document.getElementById('chat-window');
+            const helpMessage = document.createElement('div');
+            helpMessage.className = 'chat-message assistant-message';
+            helpMessage.innerHTML = `
+                <p><strong><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom; margin-right: 8px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Starting Live Chat</strong></p>
+                <p>Connecting you with a live support agent who specializes in helping seniors stay safe online.</p>
+                <div style="margin: 12px 0; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 8px; border-left: 4px solid #3B82F6;">
+                    <p style="margin: 0; font-weight: 600;">Live Chat • Average wait time: Under 30 seconds</p>
+                    <p style="margin: 4px 0 0 0; font-size: 14px; color: #6B7280;">Real people • Not bots • Patient and understanding</p>
+                </div>
+                <p style="font-size: 14px;">A new chat window will open where you can type your questions directly to our support team.</p>
+            `;
+            chatWindow.appendChild(helpMessage);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+            
+            // In a real implementation, this would open a live chat widget
+            setTimeout(() => {
+                window.open('https://support.safebrowser.com/chat', '_blank', 'width=400,height=600,scrollbars=yes,resizable=yes');
+            }, 1500);
+        }
+
+        function requestScreenShare() {
+            const chatWindow = document.getElementById('chat-window');
+            const helpMessage = document.createElement('div');
+            helpMessage.className = 'chat-message assistant-message';
+            helpMessage.innerHTML = `
+                <p><strong><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: text-bottom; margin-right: 8px;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Screen Sharing Session</strong></p>
+                <p>Our support team can see your screen to provide step-by-step guidance. You stay in complete control.</p>
+                <div style="margin: 12px 0; padding: 12px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; border-left: 4px solid #8B5CF6;">
+                    <p style="margin: 0; font-weight: 600;">Secure Screen Share • You control what we see</p>
+                    <p style="margin: 4px 0 0 0; font-size: 14px; color: #6B7280;">End session anytime • No installation required • 100% safe</p>
+                </div>
+                <div style="margin: 12px 0; padding: 10px; background: rgba(255, 243, 205, 1); border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3);">
+                    <p style="margin: 0; font-size: 14px; color: #92400E;"><strong>Privacy Promise:</strong> We can only see what you choose to share, and the session ends whenever you want.</p>
+                </div>
+                <p style="font-size: 14px;">Click "Allow" when prompted to start the secure screen sharing session.</p>
+            `;
+            chatWindow.appendChild(helpMessage);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+            
+            // In a real implementation, this would initiate screen sharing
+            setTimeout(() => {
+                window.open('https://support.safebrowser.com/screen-share', '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+            }, 2000);
         }
 
         // Initialize tour button when page loads
