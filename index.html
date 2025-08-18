@@ -522,16 +522,23 @@
 
         /* Welcome Tour Custom Styling */
         .introjs-tooltip {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(77, 144, 181, 0.2) !important;
-            border-radius: 12px !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border-radius: 16px !important;
+            box-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.12),
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                0 32px 64px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
             color: #2E2E2E !important;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
             font-size: 18px !important;
             line-height: 1.5 !important;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%) !important;
             max-width: 400px !important;
             min-width: 350px !important;
         }
@@ -581,12 +588,13 @@
         }
 
         .introjs-tooltiptext .highlight.subtle {
-            background: rgba(45, 90, 61, 0.08) !important;
-            padding: 1px 4px !important;
-            border-radius: 3px !important;
+            background: linear-gradient(135deg, rgba(45, 90, 61, 0.08) 0%, rgba(45, 90, 61, 0.05) 100%) !important;
+            padding: 2px 6px !important;
+            border-radius: 6px !important;
             border: none !important;
             color: #374151 !important;
             font-weight: 500 !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
         }
 
         .introjs-tooltiptext .highlight.green {
@@ -622,15 +630,22 @@
         /* Sophisticated Border Accents */
         .introjs-tooltiptext .accent-bar {
             border-left: 3px solid #2d5a3d !important;
-            padding-left: 12px !important;
-            margin: 8px 0 !important;
-            background: rgba(45, 90, 61, 0.04) !important;
-            border-radius: 0 4px 4px 0 !important;
+            padding: 12px 16px 12px 16px !important;
+            margin: 12px 0 !important;
+            background: linear-gradient(135deg, rgba(45, 90, 61, 0.05) 0%, rgba(45, 90, 61, 0.02) 100%) !important;
+            border-radius: 0 8px 8px 0 !important;
+            box-shadow: 
+                0 1px 3px rgba(45, 90, 61, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+            position: relative !important;
         }
 
         .introjs-tooltiptext .accent-bar.blue {
             border-left-color: #0056CC !important;
-            background: rgba(0, 86, 204, 0.04) !important;
+            background: linear-gradient(135deg, rgba(0, 86, 204, 0.06) 0%, rgba(0, 86, 204, 0.02) 100%) !important;
+            box-shadow: 
+                0 1px 3px rgba(0, 86, 204, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
         }
 
         .introjs-tooltiptext .feature-list {
@@ -730,36 +745,53 @@
 
         /* Primary action buttons (Next/Done) */
         .introjs-nextbutton, .introjs-donebutton {
-            background: #059669 !important;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
             color: white !important;
             border: 2px solid #059669 !important;
             font-size: 14px !important;
             font-weight: 600 !important;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+            border-radius: 8px !important;
+            box-shadow: 
+                0 2px 8px rgba(5, 150, 105, 0.25),
+                0 4px 16px rgba(5, 150, 105, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
         .introjs-nextbutton:hover, .introjs-donebutton:hover {
-            background: #047857 !important;
+            background: linear-gradient(135deg, #047857 0%, #065f46 100%) !important;
             color: white !important;
             border-color: #047857 !important;
-            transform: translateY(-1px) !important;
-            box-shadow: 0 4px 16px rgba(5, 150, 105, 0.25) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 
+                0 4px 16px rgba(5, 150, 105, 0.35),
+                0 8px 32px rgba(5, 150, 105, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
         }
 
         /* Secondary action button (Back) */
         .introjs-prevbutton {
-            background: #f8fafc !important;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
             color: #374151 !important;
             border: 2px solid #d1d5db !important;
             font-size: 14px !important;
+            border-radius: 8px !important;
+            box-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
         .introjs-prevbutton:hover {
-            background: #e5e7eb !important;
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%) !important;
             color: #1f2937 !important;
             border-color: #9ca3af !important;
             transform: translateY(-1px) !important;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.12),
+                0 4px 16px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
         }
 
         .introjs-skipbutton {
