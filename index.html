@@ -53,13 +53,14 @@
             backdrop-filter: blur(40px); /* Stronger blur for premium feel */
             -webkit-backdrop-filter: blur(40px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            padding: 6px 16px; /* Even more compact */
+            padding: 12px 16px; /* More breathing room */
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: relative;
             z-index: 1000;
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+            min-height: 56px; /* Ensure minimum height */
         }
         
         .brand {
@@ -69,7 +70,7 @@
         }
         
         .brand h1 {
-            font-size: 16px; /* Smaller for compact header */
+            font-size: 18px; /* Slightly larger for better visibility */
             font-weight: 600; /* Slightly lighter */
             color: #1a1a1a; /* Deeper black */
             letter-spacing: -0.3px; /* Tighter, more premium */
@@ -78,15 +79,15 @@
         }
         
         .brand-shield {
-            width: 24px; /* Smaller for compact header */
-            height: 24px;
+            width: 26px; /* Slightly larger to match text */
+            height: 26px;
             background: linear-gradient(135deg, #007AFF 0%, #0056CC 100%); /* iOS blue gradient */
             border-radius: 6px; /* Proportionally smaller radius */
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 14px; /* Smaller icon */
+            font-size: 15px; /* Slightly larger icon */
             font-weight: 700;
             box-shadow: 0 1px 6px rgba(0, 122, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -538,9 +539,65 @@
         }
 
         .introjs-tooltiptext {
-            padding: 16px 24px 20px !important;
+            padding: 20px 24px 24px !important;
             color: #2E2E2E !important;
             font-weight: 400 !important;
+            font-size: 16px !important;
+            line-height: 1.5 !important;
+        }
+
+        .introjs-tooltiptext h3 {
+            color: #059669 !important;
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            margin-bottom: 12px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+
+        .introjs-tooltiptext .highlight {
+            background: linear-gradient(120deg, #f0fdf4 0%, #dcfce7 100%) !important;
+            padding: 2px 6px !important;
+            border-radius: 4px !important;
+            font-weight: 600 !important;
+            color: #047857 !important;
+        }
+
+        .introjs-tooltiptext .highlight.green {
+            background: linear-gradient(120deg, #f0fdf4 0%, #dcfce7 100%) !important;
+            color: #059669 !important;
+        }
+
+        .introjs-tooltiptext .highlight.yellow {
+            background: linear-gradient(120deg, #fffbeb 0%, #fef3c7 100%) !important;
+            color: #d97706 !important;
+        }
+
+        .introjs-tooltiptext .highlight.red {
+            background: linear-gradient(120deg, #fef2f2 0%, #fee2e2 100%) !important;
+            color: #dc2626 !important;
+        }
+
+        .introjs-tooltiptext .feature-list {
+            list-style: none !important;
+            padding: 0 !important;
+            margin: 16px 0 !important;
+        }
+
+        .introjs-tooltiptext .feature-list li {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            margin-bottom: 8px !important;
+            font-size: 15px !important;
+        }
+
+        .introjs-tooltiptext .feature-icon {
+            width: 16px !important;
+            height: 16px !important;
+            flex-shrink: 0 !important;
+            opacity: 0.8 !important;
         }
 
         .introjs-buttons {
@@ -580,53 +637,53 @@
         .introjs-nextbutton, .introjs-donebutton, .introjs-prevbutton {
             background: white !important;
             color: #2E2E2E !important;
-            border: 3px solid #2E2E2E !important;
-            font-weight: 700 !important;
-            font-size: 18px !important;
+            border: 2px solid #2E2E2E !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
             flex: 1 !important;
-            max-width: 220px !important;
-            min-height: 56px !important;
-            padding: 16px 24px !important;
+            max-width: 110px !important;
+            min-height: 36px !important;
+            padding: 8px 16px !important;
             text-align: center !important;
             white-space: nowrap !important;
             overflow: hidden !important;
             text-overflow: ellipsis !important;
-            border-radius: 12px !important;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
         }
 
         /* Primary action buttons (Next/Done) */
         .introjs-nextbutton, .introjs-donebutton {
             background: #059669 !important;
             color: white !important;
-            border: 3px solid #059669 !important;
-            font-size: 20px !important;
-            font-weight: 800 !important;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+            border: 2px solid #059669 !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
         }
 
         .introjs-nextbutton:hover, .introjs-donebutton:hover {
             background: #047857 !important;
             color: white !important;
             border-color: #047857 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 16px rgba(5, 150, 105, 0.25) !important;
         }
 
         /* Secondary action button (Back) */
         .introjs-prevbutton {
             background: #f8fafc !important;
             color: #374151 !important;
-            border: 3px solid #d1d5db !important;
-            font-size: 17px !important;
+            border: 2px solid #d1d5db !important;
+            font-size: 14px !important;
         }
 
         .introjs-prevbutton:hover {
             background: #e5e7eb !important;
             color: #1f2937 !important;
             border-color: #9ca3af !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
         }
 
         .introjs-skipbutton {
@@ -1372,7 +1429,7 @@
     </svg>
     <div class="app-container">
         <header class="header">
-            <div class="brand" data-intro="Welcome to SafeBrowser! You now have a browser designed specifically to protect you from online scams, phishing, and confusing websites. Let me show you the powerful safety features that will keep you secure every time you browse." data-step="1">
+            <div class="brand" data-intro="<h3>Welcome to SafeBrowser</h3>You now have a browser designed specifically to protect you from <span class='highlight'>online scams</span>, <span class='highlight'>phishing</span>, and <span class='highlight'>confusing websites</span>.<br><br>Let me show you the powerful safety features that will keep you secure every time you browse." data-step="1">
                 <div class="brand-shield">
                     <svg class="icon icon-lg">
                         <use href="#icon-shield"></use>
@@ -1381,12 +1438,12 @@
                 <h1>SafeBrowser</h1>
             </div>
             <div class="header-controls">
-                <button class="control-button" id="take-tour-button" title="Take a Tour of SafeBrowser" onclick="if(typeof startWelcomeTour === 'function') startWelcomeTour(); else alert('Please wait for page to fully load and try again.');">
+                <button class="control-button" id="take-tour-button" title="Take a Tour of SafeBrowser">
                     <svg class="icon icon-md">
                         <use href="#icon-help"></use>
                     </svg>
                 </button>
-                <button class="control-button" id="font-size-toggle" title="Adjust Text Size" data-intro="These comfort tools make browsing easier! Make text larger, increase contrast for better visibility, and enable link previews to see where links go BEFORE clicking them. Plus, hover over any link to see if it's safe!" data-step="6">
+                <button class="control-button" id="font-size-toggle" title="Adjust Text Size" data-intro="<h3>Personal Comfort Settings</h3>These tools are designed just for you:<br><br>• <span class='highlight'>Text size adjustment</span> for easier reading<br>• <span class='highlight'>High contrast mode</span> for better visibility<br>• <span class='highlight'>Link previews</span> to see destinations safely<br><br>Everything can be customized to your preferences!" data-step="6">
                     <svg class="icon icon-md">
                         <use href="#icon-type"></use>
                     </svg>
@@ -1426,17 +1483,17 @@
                     </div>
 
                     <div class="unified-input-strip">
-                        <div class="safety-indicator safe" id="safety-indicator" data-intro="This is your Safety Shield! It automatically checks every website you visit. Green means safe and trusted, yellow means be careful, and red means potential danger. You'll never have to guess if a website is safe again!" data-step="3">
+                        <div class="safety-indicator safe" id="safety-indicator" data-intro="<h3>Your Safety Shield</h3>It automatically checks every website you visit:<ul class='feature-list'><li>• <span class='highlight green'>Green</span> = Safe and trusted</li><li>• <span class='highlight yellow'>Yellow</span> = Be careful</li><li>• <span class='highlight red'>Red</span> = Potential danger</li></ul>You'll never have to guess if a website is safe again!" data-step="3">
                             <svg class="icon icon-sm safety-icon">
                                 <use href="#icon-shield"></use>
                             </svg>
                             <span class="safety-text">Safe</span>
                         </div>
                         
-                        <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely..." data-intro="Just type any website address here like you normally would. SafeBrowser automatically protects you from phishing sites, fake shopping pages, and Medicare scams. Browse with complete confidence!" data-step="4">
+                        <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely..." data-intro="<h3>Safe Browsing Bar</h3>Just type any website address here like you normally would.<br><br>SafeBrowser <span class='highlight'>automatically protects</span> you from:<ul class='feature-list'><li>• Phishing sites</li><li>• Fake shopping pages</li><li>• Medicare scams</li></ul>Browse with complete confidence!" data-step="4">
                     </div>
                     
-                    <div class="secondary-nav" data-intro="Your safety toolkit is right here! 'Check Site' gives you detailed safety reports about any website. 'Safe Zone' instantly takes you to trusted sites like Amazon when you feel uncertain. Think of these as your panic buttons for online safety!" data-step="5">
+                    <div class="secondary-nav" data-intro="<h3>Your Safety Toolkit</h3>Quick action buttons for instant help:<ul class='feature-list'><li><svg class='feature-icon'><use href='#icon-search'></use></svg><span class='highlight'>Check Site</span> - Detailed safety reports</li><li><svg class='feature-icon'><use href='#icon-shield'></use></svg><span class='highlight'>Safe Zone</span> - Go to trusted sites instantly</li></ul>Think of these as your <span class='highlight'>panic buttons</span> for online safety!" data-step="5">
                         <button class="nav-button" id="check-site-button" title="Check Site">
                             <svg class="icon icon-sm">
                                 <use href="#icon-search"></use>
@@ -1463,11 +1520,11 @@
                 </div>
                 
                 <div class="webview-container">
-                    <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js" data-intro="This is where the magic happens! When you browse any website here, SafeBrowser is working behind the scenes. Try hovering over any link to see our Link Preview feature - it shows you where links go and whether they're safe BEFORE you click!" data-step="7"></webview>
+                    <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js" data-intro="<h3>Where the Magic Happens</h3>When you browse any website here, SafeBrowser is <span class='highlight'>working behind the scenes</span>.<br><br><strong>Try this:</strong> Hover over any link to see our <span class='highlight'>Link Preview</span> feature - it shows you where links go and whether they're safe BEFORE you click!" data-step="7"></webview>
                 </div>
             </div>
             
-            <div class="ai-panel" data-intro="Meet SafeGuide, your personal AI safety assistant! I watch out for scams, explain confusing websites in simple terms, and give you confidence to browse safely. Ask me anything about online safety - I'm always here to help!" data-step="2">
+            <div class="ai-panel" data-intro="<h3>Meet SafeGuide</h3>Your personal AI safety assistant who:<ul class='feature-list'><li>• Watches out for scams</li><li>• Explains confusing websites in simple terms</li><li>• Gives you confidence to browse safely</li></ul>Ask me anything about online safety - I'm always here to help!" data-step="2">
                 <div class="ai-header">
                     <div class="ai-header-content">
                         <h3 class="ai-title">SafeGuide</h3>
@@ -1534,17 +1591,11 @@
 
         // Welcome Tour functionality
         function startWelcomeTour() {
-            // Simple check and fallback
-            if (typeof introJs === 'undefined') {
-                alert('Welcome Tour: Please refresh the page and try again.');
-                return;
-            }
-            
             const tour = introJs();
             
             tour.setOptions({
                 nextLabel: 'Next →',
-                prevLabel: '← Back',
+                prevLabel: '← Back', 
                 doneLabel: 'Start Browsing Safely!',
                 skipLabel: 'Skip Tour',
                 showStepNumbers: false,
@@ -1552,7 +1603,9 @@
                 scrollToElement: true,
                 overlayOpacity: 0.8,
                 tooltipClass: 'safebrowser-tooltip',
-                highlightClass: 'safebrowser-highlight'
+                highlightClass: 'safebrowser-highlight',
+                exitOnOverlayClick: false,
+                exitOnEsc: false
             });
 
             // Add progress indicator with proper step tracking
@@ -1616,28 +1669,13 @@
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        // Initialize tour button when page loads - Multiple approaches for reliability
-        window.addEventListener('load', function() {
-            setupTourButton();
-        });
-        
+        // Initialize tour button when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            setupTourButton();
-        });
-        
-        // Also try after a short delay
-        setTimeout(setupTourButton, 1000);
-        
-        function setupTourButton() {
             const takeTourButton = document.getElementById('take-tour-button');
-            if (takeTourButton && !takeTourButton.hasAttribute('data-tour-setup')) {
-                takeTourButton.setAttribute('data-tour-setup', 'true');
-                takeTourButton.onclick = function(e) {
-                    e.preventDefault();
-                    startWelcomeTour();
-                    return false;
-                };
+            if (takeTourButton) {
+                takeTourButton.addEventListener('click', startWelcomeTour);
             }
-        }
+        });
+    </script>
 </body>
 </html>
