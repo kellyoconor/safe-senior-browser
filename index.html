@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>SafeBrowser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./introjs.min.css">
     <style>
         /* Premium Icon System */
@@ -36,7 +39,7 @@
         }
         
         body { 
-            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             background: #FAFAF7; /* Off-white background for reduced eye strain */
             color: #2E2E2E; /* Dark charcoal instead of pure black */
             font-size: 18px; /* Larger base font for seniors */
@@ -75,7 +78,7 @@
             color: #1a1a1a; /* Deeper black */
             letter-spacing: -0.3px; /* Tighter, more premium */
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
         
         .brand-shield {
@@ -113,7 +116,7 @@
             color: #374151; /* Neutral gray */
             transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 0 8px; /* Less padding */
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
         
         .control-button:hover {
@@ -363,7 +366,7 @@
             font-weight: 500;
             color: #16a34a; /* Calm green */
             flex-shrink: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
         
         .safety-indicator.safe {
@@ -391,7 +394,7 @@
             font-size: 16px;
             font-weight: 400;
             color: #1a1a1a;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             letter-spacing: -0.1px;
             min-width: 0;
         }
@@ -526,7 +529,7 @@
             border-radius: 12px !important;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
             color: #2E2E2E !important;
-            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
             font-size: 18px !important;
             line-height: 1.5 !important;
             max-width: 400px !important;
@@ -539,58 +542,129 @@
         }
 
         .introjs-tooltiptext {
-            padding: 20px 24px 24px !important;
-            color: #2E2E2E !important;
+            padding: 24px 28px 28px !important;
+            color: #374151 !important;
             font-weight: 400 !important;
             font-size: 16px !important;
-            line-height: 1.5 !important;
+            line-height: 1.6 !important;
+            letter-spacing: -0.1px !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
         }
 
         .introjs-tooltiptext h3 {
-            color: #059669 !important;
-            font-size: 20px !important;
+            color: #1a1a1a !important;
+            font-size: 22px !important;
             font-weight: 700 !important;
-            margin-bottom: 12px !important;
+            letter-spacing: -0.4px !important;
+            line-height: 1.2 !important;
+            margin-bottom: 16px !important;
+            margin-top: 0 !important;
             display: flex !important;
             align-items: center !important;
             gap: 8px !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
         }
 
+        /* Sophisticated Highlighting System */
         .introjs-tooltiptext .highlight {
-            background: linear-gradient(120deg, #f0fdf4 0%, #dcfce7 100%) !important;
-            padding: 2px 6px !important;
-            border-radius: 4px !important;
+            font-weight: 500 !important;
+            letter-spacing: -0.2px !important;
+            border-bottom: 2px solid #2d5a3d !important;
+            padding-bottom: 1px !important;
+            color: #1f2937 !important;
+            background: transparent !important;
+        }
+
+        .introjs-tooltiptext .highlight.accent {
+            color: #2d5a3d !important;
             font-weight: 600 !important;
-            color: #047857 !important;
+        }
+
+        .introjs-tooltiptext .highlight.subtle {
+            background: rgba(45, 90, 61, 0.08) !important;
+            padding: 1px 4px !important;
+            border-radius: 3px !important;
+            border: none !important;
+            color: #374151 !important;
+            font-weight: 500 !important;
         }
 
         .introjs-tooltiptext .highlight.green {
-            background: linear-gradient(120deg, #f0fdf4 0%, #dcfce7 100%) !important;
-            color: #059669 !important;
+            border-bottom: 2px solid #059669 !important;
+            color: #065f46 !important;
+            background: transparent !important;
         }
 
         .introjs-tooltiptext .highlight.yellow {
-            background: linear-gradient(120deg, #fffbeb 0%, #fef3c7 100%) !important;
-            color: #d97706 !important;
+            border-bottom: 2px solid #d97706 !important;
+            color: #92400e !important;
+            background: transparent !important;
         }
 
         .introjs-tooltiptext .highlight.red {
-            background: linear-gradient(120deg, #fef2f2 0%, #fee2e2 100%) !important;
-            color: #dc2626 !important;
+            border-bottom: 2px solid #dc2626 !important;
+            color: #991b1b !important;
+            background: transparent !important;
+        }
+
+        /* Typography-Based Emphasis */
+        .introjs-tooltiptext .emphasis {
+            font-weight: 600 !important;
+            letter-spacing: -0.3px !important;
+            color: #1f2937 !important;
+        }
+
+        .introjs-tooltiptext .emphasis.strong {
+            font-weight: 700 !important;
+            font-size: 1.05em !important;
+        }
+
+        /* Sophisticated Border Accents */
+        .introjs-tooltiptext .accent-bar {
+            border-left: 3px solid #2d5a3d !important;
+            padding-left: 12px !important;
+            margin: 8px 0 !important;
+            background: rgba(45, 90, 61, 0.04) !important;
+            border-radius: 0 4px 4px 0 !important;
+        }
+
+        .introjs-tooltiptext .accent-bar.blue {
+            border-left-color: #0056CC !important;
+            background: rgba(0, 86, 204, 0.04) !important;
         }
 
         .introjs-tooltiptext .feature-list {
             list-style: none !important;
             padding: 0 !important;
-            margin: 16px 0 !important;
+            margin: 20px 0 !important;
         }
 
         .introjs-tooltiptext .feature-list li {
             display: flex !important;
             align-items: center !important;
             gap: 8px !important;
-            margin-bottom: 8px !important;
+            margin-bottom: 12px !important;
             font-size: 15px !important;
+            font-weight: 500 !important;
+            letter-spacing: -0.05px !important;
+            color: #4b5563 !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Premium Typography Enhancements */
+        .introjs-tooltiptext p {
+            margin-bottom: 16px !important;
+            margin-top: 0 !important;
+        }
+
+        .introjs-tooltiptext strong {
+            font-weight: 600 !important;
+            color: #1f2937 !important;
+            letter-spacing: -0.15px !important;
+        }
+
+        .introjs-tooltiptext br + br {
+            line-height: 0.8 !important;
         }
 
         .introjs-tooltiptext .feature-icon {
@@ -640,6 +714,8 @@
             border: 2px solid #2E2E2E !important;
             font-weight: 500 !important;
             font-size: 14px !important;
+            letter-spacing: -0.1px !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
             flex: 1 !important;
             max-width: 110px !important;
             min-height: 36px !important;
@@ -1429,7 +1505,7 @@
     </svg>
     <div class="app-container">
         <header class="header">
-            <div class="brand" data-intro="<h3>Welcome to SafeBrowser</h3>You now have a browser designed specifically to protect you from <span class='highlight'>online scams</span>, <span class='highlight'>phishing</span>, and <span class='highlight'>confusing websites</span>.<br><br>Let me show you the powerful safety features that will keep you secure every time you browse." data-step="1">
+            <div class="brand" data-intro="<h3>Welcome to SafeBrowser</h3>You now have a browser designed specifically to protect you from <span class='highlight accent'>online scams</span>, <span class='highlight accent'>phishing</span>, and <span class='highlight accent'>confusing websites</span>.<br><br>Let me show you the powerful safety features that will keep you secure every time you browse." data-step="1">
                 <div class="brand-shield">
                     <svg class="icon icon-lg">
                         <use href="#icon-shield"></use>
@@ -1443,7 +1519,7 @@
                         <use href="#icon-help"></use>
                     </svg>
                 </button>
-                <button class="control-button" id="font-size-toggle" title="Adjust Text Size" data-intro="<h3>Personal Comfort Settings</h3>These tools are designed just for you:<br><br>• <span class='highlight'>Text size adjustment</span> for easier reading<br>• <span class='highlight'>High contrast mode</span> for better visibility<br>• <span class='highlight'>Link previews</span> to see destinations safely<br><br>Everything can be customized to your preferences!" data-step="6">
+                <button class="control-button" id="font-size-toggle" title="Adjust Text Size" data-intro="<h3>Personal Comfort Settings</h3>These tools are designed just for you:<br><br>• <span class='emphasis'>Text size adjustment</span> for easier reading<br>• <span class='emphasis'>High contrast mode</span> for better visibility<br>• <span class='emphasis'>Link previews</span> to see destinations safely<br><br>Everything can be customized to your preferences!" data-step="6">
                     <svg class="icon icon-md">
                         <use href="#icon-type"></use>
                     </svg>
@@ -1490,10 +1566,10 @@
                             <span class="safety-text">Safe</span>
                         </div>
                         
-                        <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely..." data-intro="<h3>Safe Browsing Bar</h3>Just type any website address here like you normally would.<br><br>SafeBrowser <span class='highlight'>automatically protects</span> you from:<ul class='feature-list'><li>• Phishing sites</li><li>• Fake shopping pages</li><li>• Medicare scams</li></ul>Browse with complete confidence!" data-step="4">
+                        <input type="text" id="url-input" class="url-input" value="https://amazon.com" placeholder="Search the web safely..." data-intro="<h3>Safe Browsing Bar</h3>Just type any website address here like you normally would.<br><br>SafeBrowser <span class='emphasis strong'>automatically protects</span> you from:<ul class='feature-list'><li>• Phishing sites</li><li>• Fake shopping pages</li><li>• Medicare scams</li></ul>Browse with complete confidence!" data-step="4">
                     </div>
                     
-                    <div class="secondary-nav" data-intro="<h3>Your Safety Toolkit</h3>Quick action buttons for instant help:<ul class='feature-list'><li><svg class='feature-icon'><use href='#icon-search'></use></svg><span class='highlight'>Check Site</span> - Detailed safety reports</li><li><svg class='feature-icon'><use href='#icon-shield'></use></svg><span class='highlight'>Safe Zone</span> - Go to trusted sites instantly</li></ul>Think of these as your <span class='highlight'>panic buttons</span> for online safety!" data-step="5">
+                    <div class="secondary-nav" data-intro="<h3>Your Safety Toolkit</h3>Quick action buttons for instant help:<ul class='feature-list'><li><svg class='feature-icon'><use href='#icon-search'></use></svg><span class='highlight subtle'>Check Site</span> - Detailed safety reports</li><li><svg class='feature-icon'><use href='#icon-shield'></use></svg><span class='highlight subtle'>Safe Zone</span> - Go to trusted sites instantly</li></ul>Think of these as your <span class='emphasis'>panic buttons</span> for online safety!" data-step="5">
                         <button class="nav-button" id="check-site-button" title="Check Site">
                             <svg class="icon icon-sm">
                                 <use href="#icon-search"></use>
@@ -1520,7 +1596,7 @@
                 </div>
                 
                 <div class="webview-container">
-                    <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js" data-intro="<h3>Where the Magic Happens</h3>When you browse any website here, SafeBrowser is <span class='highlight'>working behind the scenes</span>.<br><br><strong>Try this:</strong> Hover over any link to see our <span class='highlight'>Link Preview</span> feature - it shows you where links go and whether they're safe BEFORE you click!" data-step="7"></webview>
+                    <webview id="webview" src="https://amazon.com" allowpopups="false" preload="./browser.js" data-intro="<h3>Where the Magic Happens</h3>When you browse any website here, SafeBrowser is <span class='emphasis'>working behind the scenes</span>.<br><br><div class='accent-bar blue'><strong>Try this:</strong> Hover over any link to see our <span class='highlight accent'>Link Preview</span> feature - it shows you where links go and whether they're safe BEFORE you click!</div>" data-step="7"></webview>
                 </div>
             </div>
             
